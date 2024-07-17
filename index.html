@@ -696,134 +696,130 @@ document.addEventListener("DOMContentLoaded", function() {
 <!--==================== PAPERS ====================-->
 <section class="publications section" id="publications" data-id="publications">
     <h2 class="section__title">Publications</h2>
-<!--     <span class="section__subtitle">Published Papers</span> -->
-    
     <div class="papers__container">
         <!--==================== PAPER ====================-->
         <div class="papers__content">
             <div class="papers__header">
-<!--                 <img src="assets/img/image.png" alt="5GHz Gain-Bandwidth Op-Amp in 180nm technology" class="papers__img"> -->
                 <div>
                     <h3 class="papers__title">A 5GHz Gain-Bandwidth Op-Amp in 180nm Technology</h3>
                     <p class="papers__subtitle">May 2024</p>
                 </div>
                 <i class="uil uil-angle-down papers__arrow"></i>
             </div>
-
             <div class="papers__details">
                 <p class="papers__description">
-               Conference: 4th IEEE International Conference on VLSI Systems, Architecture, Technology, and Applications (VLSI SATA 2024)
+                    Conference: 4th IEEE International Conference on VLSI Systems, Architecture, Technology, and Applications (VLSI SATA 2024)
                 </p>
                 <a href="https://ieeexplore.ieee.org/document/10560243" target="_blank" class="button button--flex button--small papers__button">
                     Read
                     <i class="uil uil-arrow-right button__icon"></i>
                 </a>
             </div>
-        </div>  
+        </div>
     </div>
 </section>
 
 <style>
     /* Default styles (day mode) */
-.papers__container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+    .papers__container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
 
-.papers__content {
-    background-color: #fff; /* Default background color */
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    .papers__content {
+        background-color: #fff; /* Default background color */
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.papers__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
+    .papers__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
 
-.papers__title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333; /* Default text color */
-}
+    .papers__title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333; /* Default text color */
+    }
 
-.papers__subtitle {
-    font-size: 0.875rem;
-    color: #777; /* Default subtitle color */
-}
+    .papers__subtitle {
+        font-size: 0.875rem;
+        color: #777; /* Default subtitle color */
+    }
 
-.papers__arrow {
-    font-size: 1.25rem;
-    transition: transform 0.3s;
-    color: #777; /* Default arrow color */
-}
+    .papers__arrow {
+        font-size: 1.25rem;
+        transition: transform 0.3s;
+        color: #777; /* Default arrow color */
+        cursor: pointer; /* Ensure arrow is clickable */
+    }
 
-.papers__details {
-    margin-top: 1rem;
-    display: none;
-    transition: max-height 0.3s;
-}
+    .papers__details {
+        margin-top: 1rem;
+        display: none;
+        transition: max-height 0.3s;
+    }
 
-.papers__description {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    margin-bottom: 0.5rem;
-    color: #555; /* Default description text color */
-}
+    .papers__description {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+        color: #555; /* Default description text color */
+    }
 
-.papers__button {
-    display: flex;
-    align-items: center;
-    font-size: 0.875rem;
-    color: #fff; /* Default button text color */
-    background-color: #007bff; /* Default button background color */
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-}
+    .papers__button {
+        display: flex;
+        align-items: center;
+        font-size: 0.875rem;
+        color: #fff; /* Default button text color */
+        background-color: #007bff; /* Default button background color */
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+    }
 
-/* Night mode styles */
-body.night-mode .papers__container {
-    color: #ddd; /* Light text color for night mode */
-}
+    /* Night mode styles */
+    body.night-mode .papers__container {
+        color: #ddd; /* Light text color for night mode */
+    }
 
-body.night-mode .papers__content {
-    background-color: #333; /* Darker background color for papers content */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
+    body.night-mode .papers__content {
+        background-color: #333; /* Darker background color for papers content */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
 
-body.night-mode .papers__title,
-body.night-mode .papers__subtitle,
-body.night-mode .papers__arrow {
-    color: #ddd; /* Light text color for titles, subtitle, and arrow */
-}
+    body.night-mode .papers__title,
+    body.night-mode .papers__subtitle,
+    body.night-mode .papers__arrow {
+        color: #ddd; /* Light text color for titles, subtitle, and arrow */
+    }
 
-body.night-mode .papers__description {
-    color: #bbb; /* Light text color for description */
-}
+    body.night-mode .papers__description {
+        color: #bbb; /* Light text color for description */
+    }
 
-body.night-mode .papers__button {
-    color: #fff; /* Light text color for button text */
-    background-color: #f9660b; /* Different color for button in night mode */
-}
-
+    body.night-mode .papers__button {
+        color: #fff; /* Light text color for button text */
+        background-color: #f9660b; /* Different color for button in night mode */
+    }
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const paperHeaders = document.querySelectorAll('.papers__header');
+    document.addEventListener("DOMContentLoaded", function() {
+        const paperArrows = document.querySelectorAll('.papers__arrow');
 
-    paperHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const paperContent = header.parentElement;
-            paperContent.classList.toggle('active');
+        paperArrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                const paperContent = arrow.closest('.papers__content');
+                paperContent.classList.toggle('active');
+            });
         });
     });
-});
 </script>
 
 
