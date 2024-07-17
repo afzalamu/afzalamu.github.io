@@ -732,13 +732,13 @@ document.addEventListener("DOMContentLoaded", function() {
         border-radius: 1rem;
         padding: 1.5rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer; /* Make the whole card clickable */
     }
 
     .papers__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        cursor: pointer;
     }
 
     .papers__title {
@@ -756,7 +756,6 @@ document.addEventListener("DOMContentLoaded", function() {
         font-size: 1.25rem;
         transition: transform 0.3s;
         color: #777; /* Default arrow color */
-        cursor: pointer; /* Ensure arrow is clickable */
     }
 
     .papers__details {
@@ -811,14 +810,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const paperArrows = document.querySelectorAll('.papers__arrow');
+        const paperContents = document.querySelectorAll('.papers__content');
 
-        paperArrows.forEach(arrow => {
-            arrow.addEventListener('click', () => {
-                const papersContent = arrow.closest('.papers__content');
-                papersContent.classList.toggle('active');
-                const papersDetails = papersContent.querySelector('.papers__details');
-                papersDetails.style.display = papersContent.classList.contains('active') ? 'block' : 'none';
+        paperContents.forEach(content => {
+            content.addEventListener('click', () => {
+                content.classList.toggle('active');
+                const details = content.querySelector('.papers__details');
+                details.style.display = content.classList.contains('active') ? 'block' : 'none';
             });
         });
     });
