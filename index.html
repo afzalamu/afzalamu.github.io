@@ -815,8 +815,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         paperArrows.forEach(arrow => {
             arrow.addEventListener('click', () => {
-                const paperContent = arrow.closest('.papers__content');
-                paperContent.classList.toggle('active');
+                const papersContent = arrow.closest('.papers__content');
+                papersContent.classList.toggle('active');
+                const papersDetails = papersContent.querySelector('.papers__details');
+                papersDetails.style.display = papersContent.classList.contains('active') ? 'block' : 'none';
             });
         });
     });
