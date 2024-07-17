@@ -641,6 +641,7 @@
 .projects__title {
     font-size: 1.25rem;
     font-weight: 600;
+    color: #333;
 }
 
 .projects__subtitle {
@@ -651,6 +652,7 @@
 .projects__arrow {
     font-size: 1.25rem;
     transition: transform 0.3s;
+    color: #777;
 }
 
 .projects__details {
@@ -663,6 +665,7 @@
     font-size: 0.875rem;
     line-height: 1.6;
     margin-bottom: 0.5rem;
+    color: #555;
 }
 
 .projects__tools {
@@ -677,9 +680,30 @@
 .projects__content.active .projects__arrow {
     transform: rotate(180deg);
 }
+
+/* Night mode styles */
+body.night-mode .projects__container {
+    color: #ddd;
+}
+
+body.night-mode .projects__content {
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+body.night-mode .projects__title,
+body.night-mode .projects__subtitle,
+body.night-mode .projects__arrow {
+    color: #ddd;
+}
+
+body.night-mode .projects__description,
+body.night-mode .projects__tools {
+    color: #bbb;
+}
+
 </style>
 
-<script>
 document.addEventListener("DOMContentLoaded", function() {
     const projectHeaders = document.querySelectorAll('.projects__header');
 
@@ -690,6 +714,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
 </script>
 
 <!-- --------------------------------------------------------------------------------- -->
