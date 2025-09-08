@@ -1,2 +1,2 @@
-# afzalamu.github.io
-afzalamu.github.io
+My portfolio
+[Click here to visit](https://afzalamu.github.io/)
