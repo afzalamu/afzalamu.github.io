@@ -23,10 +23,10 @@
             --text-pink: #ff79c6;
             --text-purple: #bd93f9;
             --text-red: #ff5555;
+            --text-ghost: #6e7681; /* Color for autocomplete suggestion */
             --prompt-user: #58a6ff;
             --prompt-host: #d2a8ff;
             --prompt-path: #7ee787;
-            --suggestion-bg: #21262d; /* Color for suggestion bar */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +36,7 @@
             color: var(--text-main);
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            height: 100dvh; /* Dynamic height for mobile */
+            height: 100dvh; 
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -92,9 +92,9 @@
             overflow-x: hidden;
             position: relative;
             z-index: 1;
-            display: none; /* Hidden until boot finishes */
+            display: none; 
             -webkit-overflow-scrolling: touch;
-            padding-bottom: 70px; /* Extra padding so suggestion bar doesn't hide text */
+            padding-bottom: 100px; /* Space for keyboard */
         }
         
         #terminal-container::-webkit-scrollbar { width: 6px; }
@@ -107,6 +107,7 @@
             line-height: 1.5; 
         }
 
+        /* --- NEW PROMPT LAYOUT FOR INLINE SUGGESTION --- */
         .prompt-line { 
             display: flex; 
             align-items: center; 
@@ -114,54 +115,35 @@
             flex-wrap: wrap; 
         }
         
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            margin-left: 8px;
+        }
+
         input#cmd-input {
             background: transparent;
             border: none;
             color: white;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            flex-grow: 1;
             outline: none;
-            margin-left: 8px;
-            min-width: 50px;
+            padding: 0;
+            margin: 0;
+            min-width: 1px; /* Allow shrinking */
+            width: 10px; /* Start small, grow via JS */
         }
 
-        /* --- MOBILE SUGGESTION BAR --- */
-        #suggestion-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--suggestion-bg);
-            border-top: 1px solid #30363d;
-            padding: 12px;
-            display: none; /* Hidden by default */
-            gap: 10px;
-            overflow-x: auto;
-            white-space: nowrap;
-            z-index: 2000;
-            /* Scrollbar styling for horizontal scroll */
-            scrollbar-width: none; 
-        }
-        
-        #suggestion-bar::-webkit-scrollbar { display: none; }
-
-        .suggestion-item {
-            background-color: #30363d;
-            color: var(--text-cyan);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            border: 1px solid #444c56;
-            display: inline-block;
+        /* The Ghost Text (Suggestion) */
+        #inline-suggestion {
+            color: var(--text-ghost);
             font-family: 'Fira Code', monospace;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        .suggestion-item:active {
-            background-color: var(--text-cyan);
-            color: #000;
+            font-size: 14px;
+            white-space: pre;
+            cursor: pointer;
+            pointer-events: auto; /* clickable */
         }
 
         /* ASCII Art */
@@ -173,13 +155,24 @@
             line-height: 1.2;
         }
 
-        /* Prompt Colors */
-        .user { color: var(--prompt-user); font-weight: bold; }
-        .host { color: var(--prompt-host); font-weight: bold; }
-        .path { color: var(--prompt-path); }
+        /* Colors */
         .ls-dir { color: var(--prompt-user); font-weight: bold; }
         .ls-file { color: var(--text-main); }
         .error { color: #ff7b72; }
+        .user { color: var(--prompt-user); font-weight: bold; }
+        .host { color: var(--prompt-host); font-weight: bold; }
+        .path { color: var(--prompt-path); }
+
+        /* Hidden span to calculate text width */
+        #width-calculator {
+            position: absolute;
+            visibility: hidden;
+            height: auto;
+            width: auto;
+            white-space: pre;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+        }
 
         /* --- BOOT SCREEN --- */
         #boot-screen {
@@ -197,8 +190,7 @@
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%; 
-            height: 80%;
+            width: 80%; height: 80%;
             background-color: var(--bg-gvim);
             border: 1px solid #44475a;
             box-shadow: 0 20px 50px rgba(0,0,0,0.9);
@@ -270,7 +262,7 @@
         .syn-num { color: var(--text-purple); }
         .syn-link { color: #58a6ff; text-decoration: underline; cursor: pointer; }
 
-        /* --- MEDIA QUERIES --- */
+        /* --- MOBILE MEDIA QUERIES --- */
         @media (max-width: 768px) {
             nav { padding: 0 15px; }
             .nav-item span { display: none; } 
@@ -278,7 +270,7 @@
             .nav-links { gap: 25px; }
 
             body { font-size: 12px; }
-            input#cmd-input { font-size: 12px; }
+            input#cmd-input, #inline-suggestion, #width-calculator { font-size: 12px; }
             .ascii-art { font-size: 10px; }
             
             #gvim-overlay { width: 95%; height: 85%; }
@@ -288,11 +280,6 @@
         @media (max-width: 400px) {
             .ascii-art { display: none; }
             .nav-logo { font-size: 16px; }
-        }
-
-        /* IMPORTANT: Only show suggestion bar on screens smaller than 768px */
-        @media (min-width: 769px) {
-            #suggestion-bar { display: none !important; }
         }
 
     </style>
@@ -311,7 +298,7 @@
 
     <div id="boot-screen"></div>
 
-    <div id="terminal-container" onclick="document.getElementById('cmd-input').focus()">
+    <div id="terminal-container" onclick="focusInput()">
         <div class="ascii-art">
    _____  ____ ______ ___   _      
   /  _  \|   |/  /   /  /  / \     
@@ -321,7 +308,7 @@
         \/      \/             \/    
         </div>
         <div style="margin-bottom: 20px;">
-            Afzal Malik | Design Engineer [Version 4.0.0]<br>
+            Afzal Malik | Design Engineer [Version 4.1.0]<br>
             (c) 2026 Afzal Malik. All rights reserved.<br><br>
             Type <span style="color: var(--text-green)">'help'</span> for a list of commands.<br>
             Type <span style="color: var(--text-pink)">'ls'</span> to see files.<br>
@@ -333,11 +320,15 @@
 
         <div class="prompt-line">
             <span class="user">visitor</span><span style="color:white">@</span><span class="host">afzal.dev</span><span style="color:white">:</span><span class="path" id="current-path">~</span><span style="color:white">$</span>
-            <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" autocapitalize="none">
+            
+            <div class="input-wrapper">
+                <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" autocapitalize="none">
+                <span id="inline-suggestion"></span>
+            </div>
         </div>
     </div>
 
-    <div id="suggestion-bar"></div>
+    <span id="width-calculator"></span>
 
     <div id="gvim-overlay">
         <div class="gvim-header">
@@ -635,11 +626,20 @@ YEAR: 2021 - 2025
         const cmdInput = document.getElementById('cmd-input');
         const historyDiv = document.getElementById('history');
         const pathSpan = document.getElementById('current-path');
-        const suggestionBar = document.getElementById('suggestion-bar');
+        const inlineSuggestion = document.getElementById('inline-suggestion');
+        const widthCalculator = document.getElementById('width-calculator');
         const gvimModal = document.getElementById('gvim-overlay');
         const gvimContent = document.getElementById('gvim-content');
         const gvimLines = document.getElementById('gvim-lines');
         const gvimFilename = document.getElementById('gvim-filename');
+
+        function focusInput() {
+            // Prevent focusing if selecting text
+            const selection = window.getSelection();
+            if (selection.type !== 'Range') {
+                cmdInput.focus();
+            }
+        }
 
         function getDirFromPath(pathArray) {
             let current = fileSystem["~"];
@@ -660,6 +660,54 @@ YEAR: 2021 - 2025
             historyDiv.appendChild(div);
             terminalContainer.scrollTop = terminalContainer.scrollHeight;
         }
+
+        // --- INLINE SUGGESTION LOGIC ---
+        function updateInputWidth() {
+            // Copy text to hidden span to calculate width
+            widthCalculator.innerText = cmdInput.value || '';
+            // Add a small buffer (10px) to prevent cutting off cursor
+            const width = widthCalculator.getBoundingClientRect().width;
+            cmdInput.style.width = Math.max(10, width + 5) + "px";
+        }
+
+        function updateSuggestion() {
+            const val = cmdInput.value;
+            const lastSpaceIndex = val.lastIndexOf(' ');
+            const currentWord = val.substring(lastSpaceIndex + 1);
+
+            // Reset
+            inlineSuggestion.innerText = "";
+
+            if (currentWord.length > 0) {
+                const dir = getDirFromPath(currentPath);
+                if (dir && dir.children) {
+                    const matches = Object.keys(dir.children).filter(k => k.startsWith(currentWord));
+                    if (matches.length > 0) {
+                        // Get the first match
+                        let match = matches[0];
+                        // If it's a directory, append slash for visual clarity
+                        if (dir.children[match].type === 'dir') match += '/';
+                        
+                        // We only want to show the suffix that hasn't been typed yet
+                        const suffix = match.substring(currentWord.length);
+                        inlineSuggestion.innerText = suffix;
+                    }
+                }
+            }
+        }
+
+        // Tap on suggestion to complete
+        inlineSuggestion.addEventListener('click', () => {
+            cmdInput.value += inlineSuggestion.innerText;
+            inlineSuggestion.innerText = "";
+            updateInputWidth();
+            cmdInput.focus();
+        });
+
+        cmdInput.addEventListener('input', () => {
+            updateInputWidth();
+            updateSuggestion();
+        });
 
         // Syntax Highlighter for Text Files + LINKS
         function colorize(text) {
@@ -759,63 +807,14 @@ YEAR: 2021 - 2025
             clear: () => historyDiv.innerHTML = ""
         };
 
-        // --- 5. EVENT LISTENERS ---
-        
-        // --- MOBILE AUTOCOMPLETE LOGIC ---
-        // Listens to every keystroke (input event)
-        cmdInput.addEventListener('input', (e) => {
-            // Only run if screen width is mobile (<768px)
-            if (window.innerWidth > 768) {
-                suggestionBar.style.display = 'none';
-                return;
-            }
-
-            const val = cmdInput.value;
-            // Get the word currently being typed (last word after space)
-            const lastSpaceIndex = val.lastIndexOf(' ');
-            const currentWord = val.substring(lastSpaceIndex + 1);
-
-            if (currentWord.length > 0) {
-                const dir = getDirFromPath(currentPath);
-                // Find matches in current directory
-                if (dir && dir.children) {
-                    const matches = Object.keys(dir.children).filter(k => k.startsWith(currentWord));
-                    
-                    if (matches.length > 0) {
-                        suggestionBar.innerHTML = '';
-                        suggestionBar.style.display = 'flex'; // Show bar
-                        
-                        matches.forEach(match => {
-                            const btn = document.createElement('div');
-                            btn.className = 'suggestion-item';
-                            // Add trailing slash for dirs
-                            const displayParams = dir.children[match].type === 'dir' ? match + '/' : match;
-                            btn.innerText = displayParams;
-                            
-                            // On tap, fill the input
-                            btn.onclick = () => {
-                                let prefix = val.substring(0, lastSpaceIndex + 1);
-                                cmdInput.value = prefix + match;
-                                suggestionBar.style.display = 'none';
-                                cmdInput.focus();
-                            };
-                            suggestionBar.appendChild(btn);
-                        });
-                    } else {
-                        suggestionBar.style.display = 'none';
-                    }
-                }
-            } else {
-                suggestionBar.style.display = 'none';
-            }
-        });
-
         cmdInput.addEventListener('keydown', (e) => {
             if (isGvimOpen) return;
 
             if (e.key === 'Enter') {
                 const raw = cmdInput.value;
-                suggestionBar.style.display = 'none'; // Hide suggestions on Enter
+                // Auto complete if enter is pressed and suggestion exists? 
+                // Usually shell runs command. We clear suggestion.
+                inlineSuggestion.innerText = "";
                 
                 const parts = raw.trim().split(/\s+/);
                 const cmd = parts[0];
@@ -830,23 +829,29 @@ YEAR: 2021 - 2025
                     else printOutput(`bash: ${cmd}: command not found`, "error");
                 }
                 cmdInput.value = "";
+                updateInputWidth();
             } else if (e.key === 'ArrowUp') {
                 e.preventDefault();
-                if (historyIdx > 0) cmdInput.value = historyStack[--historyIdx];
+                if (historyIdx > 0) {
+                    cmdInput.value = historyStack[--historyIdx];
+                    updateInputWidth();
+                }
             } else if (e.key === 'ArrowDown') {
                 e.preventDefault();
-                if (historyIdx < historyStack.length - 1) cmdInput.value = historyStack[++historyIdx];
-                else cmdInput.value = "";
+                if (historyIdx < historyStack.length - 1) {
+                    cmdInput.value = historyStack[++historyIdx];
+                    updateInputWidth();
+                } else {
+                    cmdInput.value = "";
+                    updateInputWidth();
+                }
             } else if (e.key === 'Tab') {
                 e.preventDefault();
-                const dir = getDirFromPath(currentPath);
-                const currentInput = cmdInput.value;
-                const lastSpace = currentInput.lastIndexOf(" ");
-                const partial = currentInput.substring(lastSpace + 1);
-                
-                const match = Object.keys(dir.children).find(k => k.startsWith(partial));
-                if (match) {
-                    cmdInput.value = currentInput.substring(0, lastSpace + 1) + match;
+                // If suggestion is visible, tab completes it
+                if (inlineSuggestion.innerText !== "") {
+                    cmdInput.value += inlineSuggestion.innerText;
+                    inlineSuggestion.innerText = "";
+                    updateInputWidth();
                 }
             }
         });
