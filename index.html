@@ -1,1096 +1,725 @@
-
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       
-        <!--==================== UNICONS ====================-->
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-        
-        <!--==================== SWIPER CSS ====================-->
-        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-        
-        <!--==================== CSS ====================-->
-        <link rel="stylesheet" href="assets/css/styles.css">
-
-        <!--==================== EMAIL SERVICE ====================-->
-        <!-- Sweet Alert -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <!-- Email.JS -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-        <script type="text/javascript">
-            (function() {
-                emailjs.init('gF3M_-jS8KuvoCpV4');
-            })();
-        </script>
-
-        <!--==================== CALENDAR SERVICE ====================-->
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
-        <!--==================== TITLE and Favicon ====================-->
-        <title>Afzal Malik's Website 👋</title>
-        <!-- <link rel="shortcut icon" type="image/png" href="assets/img/"> --> 
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
-        <!-- <link rel="manifest" href="/site.webmanifest"> -->
-     
-
-        <!-- MS Tile - for Microsoft apps-->
-        <meta name="msapplication-TileImage" content="/assets/snaps/light.png" />    
-
-        <!-- HTML Meta Tags -->
-        <title>Afzal Malik's Website 👋</title>
-        <meta name="description" content="I'm a passionate Design Engineer with interest in VLSI. I like designing circuits and systems from scratch. My interests lie in both the analog and digital domains of VLSI, where I continually strive to innovate and improve.">
-
-        <!-- Facebook Meta Tags -->
-        <meta property="og:url" content="https://github.com/afzalamu">
-        <meta property="og:type" content="https://github.com/afzalamu">
-        <meta property="og:title" content="Afzal Malik's Website 👋">
-        <meta property="og:description" content="I'm a passionate Design Engineer with interest in VLSI. I like designing circuits and systems from scratch.">
-        <meta property="og:image" content="/assets/snaps/light.png">
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afzal Malik @ Terminal</title>
     
-
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2367QRTG56"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-2367QRTG56');
-        </script>
-
-    </head>
-
-    <body>
-        <!--==================== HEADER ====================-->
-        <header class="header" id="header">
-            <nav class="nav container">
-                <a href="#" class="nav__logo">Afzal Malik</a>
-
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list grid">
-                        <li class="nav__item">
-                            <a href="#home" class="nav__link active-link">
-                                <i class="uil uil-estate nav__icon"></i> Home
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#about" class="nav__link">
-                                <i class="uil uil-user nav__icon"></i> About
-                            </a>
-                        </li>
-
-                        <li class="nav__item">
-                            <a href="#skills" class="nav__link">
-                                <i class="uil uil-file-alt nav__icon"></i> Skills
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#qualification" class="nav__link">
-                                <i class="uil uil-graduation-cap nav__icon"></i> Qualification
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#projects" class="nav__link">
-                                <i class="uil uil-briefcase-alt nav__icon"></i> Projects
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#publications" class="nav__link">
-                                <i class="uil uil-scenery nav__icon"></i> Publications
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#contact" class="nav__link">
-                                <i class="uil uil-message nav__icon"></i> Contact
-                            </a>
-                        </li>
-                    </ul>
-                    <i class="uil uil-times nav__close" id="nav-close"></i>
-                </div>
-
-                <div class="nav__btns">
-                    <!-- Theme Change Buttons -->
-                    <i class="uil uil-moon change-theme" id="theme-button"></i>
-
-
-                    <div class="nav__toggle" id="nav-toggle">
-                        <i class="uil uil-apps"></i>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <!--==================== MAIN ====================-->
-        <main class="main">
-            <!--==================== HOME ====================-->
-            <section class="home section" id="home" data-id="home">
-                <div class="home__container container grid">
-                    <div class="home__content grid">
-                        <div class="home__social">
-                            <a href="https://linkedin.com/in/malik-afzal" target="_blank" class="home__social-icon">
-                                <i class="uil uil-linkedin-alt"></i>
-                            </a>
-                            <a href="https://www.researchgate.net/profile/Afzal-Malik-3" target="_blank" class="home__social-icon">
-                                <i class="uil uil-graduation-cap"></i>
-                            </a>
-                            <a href="https://github.com/afzalamu" target="_blank" class="home__social-icon">
-                                <i class="uil uil-github-alt"></i>
-                            </a>
-                        </div>
-
-                        <div class="home__img">
-                            <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <mask id="mask0" mask-type="alpha">
-                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                                </mask>
-                                <g mask="url(#mask0)">
-                                    <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-
-                                    <image class="home__blob-img" x='12' y='18' xlink:href="assets/img/perfil.png"/>
-                                </g>
-                            </svg>
-                        </div>
-
-                        <div class="home__data">
-                            <h1 class="home__title">Assalamoalaikum <br> I am Afzal Malik.</h1> 
-                            <h3 class="home__subtitle">Design Engineer <br> @Zia Semiconductor Pvt Ltd </h3>
-                            <p class="home__description">I'm a passionate Design Engineer with interest in VLSI. I like designing circuits and systems from scratch.</p>
-                            <a href="#contact" class="button button--flex">
-                                Contact Me <i class="uil uil-message button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="home__scroll">
-                        <a href="#about" class="home__scroll-button button--flex">
-                            <i class="uil uil-mouse-alt home__scroll-mouse"></i>
-                            <span class="home__scroll-name">Scroll Down</span>
-                            <i class="uil uil-arrow-down home__scroll-arrow"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== ABOUT ====================-->
-            <section class="about section" id="about" data-id="about">
-                <h2 class="section__title">About Me</h2>
-                <span class="section__subtitle">  </span>
-
-                <div class="about__container container grid">
-                    <img src="assets/img/perfil.png" alt="Afzal Malik Profile Pic" class="about__img">
-
-
-                    <div class="about__data">
-                        <p class="about__description">I'm a passionate Design engineer with interest in designing circuits and systems. My interests lie in both the digital and analog domains of VLSI, where I continually strive to innovate and improve.
-                            I have completed Bachelor Of Technology in Electronics Engineering from Aligarh Muslim Univeristy in 2025.
-                        </p>
-
-<!--                         <div class="about__info">
-                            <div>
-                                <span class="about__info-title">08+</span>
-                                <span class="about__info-name">Years' <br> Experience</span>
-                            </div>
-
-                            <div>
-                                <span class="about__info-title">11+</span>
-                                <span class="about__info-name">Projects <br> Completed</span>
-                            </div>
-
-                            <div>
-                                <span class="about__info-title">13</span>
-                                <span class="about__info-name">Papers <br> Published</span>
-                            </div>
-                        </div> -->
-
-                        <div class="about__buttons">
-                            <a download="" href="assets/pdf/AfzalMalik_Resume.pdf" class="button button--flex">
-                                Download Resume<i class="uil uil-download-alt button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!--==================== SKILLS ====================-->
-            <section class="skills section" id="skills" data-id="skills">
-                <h2 class="section__title">Skills</h2>
-<!--                 <span class="section__subtitle">Technical Competence</span> -->
-
-                <div class="skills__container container grid">
-                    <div>
-                        <!--==================== SKILLS 1 ====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-mouse-alt skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Tools </h1>
-                                    <!-- <span class="skills__subtitle">More than 8 years</span> -->
-                                </div>
-
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Cadence Virtuoso</h3>
-                                        <!--<span class="skills__number">Advanced</span> -->
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">LT Spice</h3>
-                                        <!--<span class="skills__number">Advanced</span> -->
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div> 
-
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Glade (Layout)</h3>
-                                        <!--<span class="skills__number">Advanced</span> -->
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Vim</h3>
-                                        <!--<span class="skills__number">Advanced</span> -->
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                 <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Xilinx Vivado</h3>
-                                        <!--<span class="skills__number">Advanced</span> -->
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                 <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">MS Office</h3>
-                                        <!--<span class="skills__number">Advanced</span> -->
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-                                
-                                
-                            </div>
-                        </div>
-
-                        <!--==================== SKILLS 2 ====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-file-alt skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Technology Node</h1>
-                                    <!-- <span class="skills__subtitle">More than 2 years</span> -->
-                                </div>
-
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">FINFet 7nm</h3>
-                                        <!--<span class="skills__number">Proficient</span>--> 
-                                    </div>
-                                    <div class="skills__bar">
-                                        <!--<span class="skills__percantage skills__80"></span>-->
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">CMOS 28nm</h3>
-                                        <!--<span class="skills__number">Proficient</span>--> 
-                                    </div>
-                                    <div class="skills__bar">
-                                        <!--<span class="skills__percantage skills__80"></span>-->
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">CMOS 180nm | TSMC 180nm</h3>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <!--<span class="skills__percantage skills__20"></span>-->
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>                        
-                    </div>
-
-                    <div>
-
-                        <!-- ==================== SKILLS 3 ==================== -->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-briefcase-alt skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Technical</h1>
-                                    <!-- <span class="skills__subtitle">More than 2 years</span> -->
-                                </div>
-
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Memory Design and Layout (SRAM)</h3>
-                                        <!--<span class="skills__number">Proficient</span>--> 
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Analog Circuit Design</h3>
-                                        <!--<span class="skills__number">Proficient</span>--> 
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Scripting : TCL | BASH</h3>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Verilog | FPGA | Digital System Design</h3>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">C / C++ | DSA</h3>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div> 
-                        </div> 
-                    
-
-                        <!--==================== SKILLS 4 ====================-->
-                     <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-code-branch skills__icon"></i>
-
-                                <div>
-                                    <h1 class="skills__titles">Operating System</h1>
-                                    <!-- <span class="skills__subtitle">More than 2 years</span> -->
-                                </div>
-
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Linux (Ubuntu)</h3>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Windows</h3>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percantage skills__sys-code"></span>
-                                    </div>
-                                </div>
-                                
-
-                            </div>
-                        </div>  
-
-                    </div> 
-                </div>
-            </section>
-
-            <!--==================== QUALIFICATION ====================-->
-            <section class="qualification section" id="qualification" data-id="qualification">
-                <h2 class="section__title">Qualification</h2>
-                <span class="section__subtitle">Academic and Professional Career</span>
-
-                <div class="qualification__container container">
-                    <div class="qualification__tabs">
-                        <div class="qualification__button button--flex qualification__active" data-target="#work">
-                            <i class="uil uil-briefcase-alt qualification__icon"></i>
-                            Experience
-                        </div>
-
-                        <div class="qualification__button button--flex" data-target="#education">
-                            <i class="uil uil-graduation-cap qualification__icon"></i>
-                            Education
-                        </div>
-                    </div>
-                    <div class="qualification__sections">
-                        <!--==================== QUALIFICATION CONTENT 1 ====================-->
-                        <div class="qualification__content " data-content id="education">
-                             <!--==================== QUALIFICATION  1 ====================-->
-                             <div class="qualification__data">
-                                <div>
-                                    <span class="qualification__degree">Bachelor of Technology</span>
-                                    <h3 class="qualification__title">Electronics Engineering</h3>
-                                    <span class="qualification__subtitle">Aligarh Muslim Univeristy</span>
-                                    <div class="qualification__calendar">
-                                        <i class="uil uil-calendar-alt"></i>
-                                        2021 - 2025
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="qualification__rounder"></span>
-                                    <span class="qualification__line"></span>
-                                </div>
-                            </div>
-
-                             <!--==================== QUALIFICATION  2 ====================-->
-                            <div class="qualification__data">
-                               <div></div>
-                               <div>
-                                   <span class="qualification__rounder"></span>
-                                   <span class="qualification__line"></span>
-                               </div>
-
-                               <div>
-                                    <span class="qualification__degree">Intermediate</span>
-                                    <h3 class="qualification__title">PCM</h3>
-                                    <span class="qualification__subtitle">CBSE</span>
-                                    <div class="qualification__calendar">
-                                        <i class="uil uil-calendar-alt"></i>
-                                        2017 - 2019
-                                    </div>
-                                </div>
-                               </div>
-
-                           </div>
-
-                            
-
-                        </div>
-
-                        <!--==================== QUALIFICATION CONTENT 2 ====================-->
-                        <div class="qualification__content qualification__active" data-content id="work">
-                            <!--==================== QUALIFICATION  1 ====================-->
-                            <div class="qualification__data">
-                               <div>
-                                   <h3 class="qualification__title">Circuit Design Engineer</h3>
-                                   <span class="qualification__subtitle">Zia Semiconductor Pvt Ltd</span>
-                                   <div class="qualification__calendar">
-                                       <i class="uil uil-calendar-alt"></i>
-                                       July 2025 - Till Now
-                                   </div>
-                               </div>
-                               <div>
-                                   <span class="qualification__rounder"></span>
-                                   <span class="qualification__line"></span>
-                               </div>
-                           </div>
-
-                            <!--==================== QUALIFICATION  2 ====================-->
-                            <div class="qualification__data">
-                               <div></div>
-                               <div>
-                                   <span class="qualification__rounder"></span>
-                                   <span class="qualification__line"></span>
-                               </div>
-
-                               <div>
-                                   <h3 class="qualification__title">Analog Circuit Design Intern</h3>
-                                   <span class="qualification__subtitle"> Under Dr.GS Javed Mentorship (Analog Design Manager, Intel)</span>
-                                   <div class="qualification__calendar">
-                                       <i class="uil uil-calendar-alt"></i>
-                                       June 2023 - July 2023
-                                   </div>
-                               </div>
-
-                           </div>
-                           
-
-                           </div>
-
-
-                       </div>
-
-                    </div>
-                </div>
-            </section>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- THEME --- */
+        :root {
+            --bg-term: #0d1117;
+            --bg-nav: #161b22;
+            --bg-gvim: #282a36;
+            --text-main: #f8f8f2;
+            --text-muted: #6272a4;
+            --text-cyan: #8be9fd;
+            --text-green: #50fa7b;
+            --text-orange: #ffb86c;
+            --text-pink: #ff79c6;
+            --text-purple: #bd93f9;
+            --text-red: #ff5555;
+            --prompt-user: #58a6ff;
+            --prompt-host: #d2a8ff;
+            --prompt-path: #7ee787;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-term);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- TOP NAVIGATION BAR --- */
+        nav {
+            height: 60px;
+            background-color: var(--bg-nav);
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-green);
+            text-decoration: none;
+            border: 1px solid var(--text-green);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-item {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover { color: var(--text-cyan); }
+        .nav-item i { margin-right: 6px; }
+
+        /* --- TERMINAL AREA --- */
+        #terminal-container {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 1;
+            display: none; /* Hidden until boot finishes */
+        }
+        
+        #terminal-container::-webkit-scrollbar { width: 8px; }
+        #terminal-container::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+
+        .output-line { margin-bottom: 4px; white-space: pre-wrap; line-height: 1.5; }
+        .prompt-line { display: flex; align-items: center; margin-top: 5px; }
+        
+        input#cmd-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            flex-grow: 1;
+            outline: none;
+            margin-left: 8px;
+        }
+
+        /* Colors */
+        .ls-dir { color: var(--prompt-user); font-weight: bold; }
+        .ls-file { color: var(--text-main); }
+        .error { color: #ff7b72; }
+        
+        /* Prompt Colors */
+        .user { color: var(--prompt-user); font-weight: bold; }
+        .host { color: var(--prompt-host); font-weight: bold; }
+        .path { color: var(--prompt-path); }
+
+        /* --- BOOT SCREEN --- */
+        #boot-screen {
+            position: fixed;
+            top: 60px; /* Below nav */
+            left: 0; width: 100%; height: calc(100% - 60px);
+            background: var(--bg-term);
+            padding: 20px;
+            z-index: 10;
+        }
+
+        /* --- GVIM WINDOW --- */
+        #gvim-overlay {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%; height: 85%;
+            background-color: var(--bg-gvim);
+            border: 1px solid #44475a;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            z-index: 2000;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        .gvim-header {
+            background-color: #44475a;
+            padding: 8px 15px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .window-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-red);
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+            color: #ff0000;
+        }
+
+        .gvim-body {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            display: flex;
+        }
+
+        .line-numbers {
+            color: var(--text-muted);
+            text-align: right;
+            padding-right: 15px;
+            border-right: 1px solid #44475a;
+            margin-right: 15px;
+            min-width: 35px;
+            user-select: none;
+        }
+
+        .code-content { flex-grow: 1; outline: none; }
+
+        .gvim-status-bar {
+            background-color: #44475a;
+            padding: 4px 10px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-cyan);
+        }
+
+        /* Syntax Highlighting */
+        .syn-header { color: var(--text-pink); font-weight: bold; }
+        .syn-bullet { color: var(--text-cyan); }
+        .syn-string { color: var(--text-green); }
+        .syn-label { color: var(--text-orange); font-weight: bold; }
+        .syn-num { color: var(--text-purple); }
+        .syn-link { color: #58a6ff; text-decoration: underline; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-logo" onclick="location.reload()">AM.</a>
+        <div class="nav-links">
+            <a href="mailto:afzalmalik68099@gmail.com" class="nav-item"><i class="fa-solid fa-envelope"></i> Email</a>
+            <a href="https://www.linkedin.com/in/malik-afzal/" target="_blank" class="nav-item"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/afzalamu" target="_blank" class="nav-item"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="assets/pdf/AfzalMalik_Resume.pdf" target="_blank" class="nav-item" style="color: var(--text-green)"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+        </div>
+    </nav>
+
+    <div id="boot-screen"></div>
+
+    <div id="terminal-container" onclick="document.getElementById('cmd-input').focus()">
+        <div style="color: var(--prompt-path); font-weight: bold; margin-bottom: 20px;">
+   _____  ____ ______ ___   _      <br>
+  /  _  \|   |/  /   /  /  / \     <br>
+ /  /_\  \   <  /   /  /  /  /     <br>
+/    |    \   \ \  /  /__/  /__    <br>
+\____|__  /__| \ \/____/____/  /   <br>
+        \/      \/             \/    
+        </div>
+        <div style="margin-bottom: 20px;">
+            Afzal Malik | Design Engineer [Version 3.6.0]<br>
+            (c) 2026 Afzal Malik. All rights reserved.<br><br>
+            Type <span style="color: var(--text-green)">'help'</span> for a list of commands.<br>
+            Type <span style="color: var(--text-pink)">'ls'</span> to see files.<br>
+            Use <span style="color: var(--text-pink)">'gvim filename.txt'</span> to view details.<br>
+            -------------------------------------------------
+        </div>
+        
+        <div id="history"></div>
+
+        <div class="prompt-line">
+            <span class="user">visitor</span><span style="color:white">@</span><span class="host">afzal.dev</span><span style="color:white">:</span><span class="path" id="current-path">~</span><span style="color:white">$</span>
+            <input type="text" id="cmd-input" autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <div id="gvim-overlay">
+        <div class="gvim-header">
+            <span id="gvim-filename">[No Name]</span>
+            <div class="window-controls">
+                <span style="opacity: 0.6; font-size: 11px;">READ ONLY</span>
+                <button class="close-btn" onclick="closeGvim()" title="Close Window">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        <div class="gvim-body">
+            <div class="line-numbers" id="gvim-lines"></div>
+            <div class="code-content" id="gvim-content"></div>
+        </div>
+        <div class="gvim-status-bar">
+            <span>-- TEXT VIEW --</span>
+            <span id="gvim-file-status">100%</span>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. FILE SYSTEM CONTENT ---
+        const fileSystem = {
+            "~": {
+                "type": "dir",
+                "children": {
+                    "README.txt": {
+                        "type": "file",
+                        "content": `WELCOME TO MY TERMINAL PORTFOLIO
+
+I am Afzal Malik, an Electronics Engineer specializing in VLSI and Digital Design.
+I am currently working as a Memory Design Engineer at STMicroelectronics (Subcontractor via Zia Semiconductor Pvt Ltd).
+
+HOW TO NAVIGATE:
+1. Type 'ls' to see the directories (experience, projects, etc.).
+2. Type 'cd experience' to go into that folder.
+3. Type 'ls' again to see the files.
+4. Type 'gvim st_microelectronics.txt' to read the details.`
+                    },
+                    "experience": {
+                        "type": "dir",
+                        "children": {
+                            "st_microelectronics.txt": {
+                                "type": "file",
+                                "content": `ROLE: Memory Design Engineer
+COMPANY: STMicroelectronics (Subcontractor via Zia Semiconductor)
+DATE: September 2025 - Present
+
+[SUMMARY]
+Working as a Memory Design Engineer.
+Developing skills and learning more about the design, simulation, and characterization of SRAM and custom memory.`
+                            },
+                            "zia_semiconductor.txt": {
+                                "type": "file",
+                                "content": `ROLE: Circuit Design Engineer
+COMPANY: Zia Semiconductor Pvt Ltd
+DATE: July 2025 - Present
+
+[SUMMARY]
+Full-custom design and verification of SRAM memory IPs in 7nm FinFET technology.
+
+[KEY RESPONSIBILITIES]
+* Memory Design:
+  - Designed schematic for Control Logic, Clock Generators, and Pre-decoders (2048x128 SRAM).
+  - Implemented bitcell arrays and column muxing strategies.
+
+* Layout:
+  - Layout of Row Decoder and SRAM top-level integration.
+  - Passed DRC/LVS checks using Glade.
+
+* Automation:
+  - Developed Bash scripts to automate timing vector generation.`
+                            },
+                            "analog_internship.txt": {
+                                "type": "file",
+                                "content": `ROLE: Analog Circuit Design Intern
+MENTOR: Dr. GS Javed (Intel)
+DATE: June 2023 - July 2023
+
+[PROJECT]
+Design, Simulation, and Layout of a Two-Stage Operational Amplifier.
+
+[ACHIEVEMENTS]
+* Methodology: Used Gm/Id methodology for sizing in 180nm.
+* Specs Met: Gain > 60dB, GBW > 1GHz, Phase Margin: 50 degrees.
+* Tools: LT Spice, ADT, Electric Binary.`
+                            }
+                        }
+                    },
+                    "projects": {
+                        "type": "dir",
+                        "children": {
+                            "sram_memory_7nm.txt": {
+                                "type": "file",
+                                "content": `PROJECT: 2048x128 SRAM Memory Design in 7nm FinFET
+COMPANY: Associated with Zia Semiconductor Pvt Ltd
+DATE: July 2025
+TOOLS: LT SPICE, Glade, Bash, Linux
+
+[SUMMARY]
+Worked on the complete design and verification of an SRAM memory block in 7nm FinFET technology. Covered schematic design, timing verification, automation scripting, and layout implementation.
+
+[KEY CONTRIBUTIONS]
+* Designed the schematic of the control section, including internal clock generator and pre-decoding blocks.
+* Implemented the SRAM array block with bitcells and performed column muxing.
+* Automated simulations by writing Bash scripts.
+* Completed layout design of the Row Decoder and integrated the SRAM array layout.`
+                            },
+                            "pll_2.4ghz.txt": {
+                                "type": "file",
+                                "content": `PROJECT: Design of Phase Locked Loop (PLL) in CMOS 180nm
+DATE: Aug 2024
+TOOLS: LT SPICE, CADENCE
+
+[SUMMARY]
+Complete design and simulation of a 2.4 GHz Phase Locked Loop (PLL) in 180 nm Technology.
+
+[DETAILS]
+* Blocks Designed: LC VCO, Frequency Divider (TSPC), PFD, Charge Pump.
+* Integration: Verified locking behavior and settling time.
+
+[REPOSITORY]
+https://github.com/afzalamu/Design-of-Phase-locked-loop-for-2.4-GHz-frequency-in-180nm-Technology`
+                            },
+                            "fpga_neural_net.txt": {
+                                "type": "file",
+                                "content": `PROJECT: FPGA Implementation of Neural Network Digit Recognition
+DATE: Jan - May 2024
+TOOLS: Xilinx Vivado, Nexys A7 FPGA
+
+[SUMMARY]
+Design of a software model for Handwritten Digit Recognition using Python, followed by hardware realization on FPGA.
+
+[WORKFLOW]
+* Software: Trained model in Python to extract weights/biases.
+* Hardware: Implemented Neural Network using Verilog HDL.
+
+[LINK]
+https://www.linkedin.com/posts/malik-afzal_fpgaimplementation-neuralnetworkdesign-hardwaredesign-activity-7214560873271476224-Y0GQ/`
+                            },
+                            "opamp_design.txt": {
+                                "type": "file",
+                                "content": `PROJECT: Design and Layout of Two-Stage Operational Amplifier
+DATE: June - July 2023
+TOOLS: LT Spice, ADT, Electric Binary
+
+[SUMMARY]
+Utilized Gm/Id methodology to design a Two-Stage Op-Amp in 180nm technology.
+Specs: Gain > 60dB, GBW > 1GHz, PM: 50deg.
+
+[REPOSITORY]
+https://github.com/afzalamu/Design-of-two-stage-operational-amplifier-at-180nm-Technology`
+                            },
+                            "fir_filter_fpga.txt": {
+                                "type": "file",
+                                "content": `PROJECT: FPGA Implementation of FIR Filter using MAC
+DATE: Nov 2023
+TOOLS: Xilinx Vivado
+
+[SUMMARY]
+Designed a Finite Impulse Response (FIR) filter using MAC units and implemented it on FPGA.
+
+[REPOSITORY]
+https://github.com/afzalamu/FIR-Filter-using-MAC`
+                            },
+                            "cmos_inverter_gds.txt": {
+                                "type": "file",
+                                "content": `PROJECT: CMOS Inverter Design and GDSII Generation
+DATE: Nov 2023
+TOOLS: Cadence Virtuoso (GPDK90)
+
+[SUMMARY]
+Covered the entire workflow from schematic design to GDSII generation.
+Verified via DRC, LVS, and RC Parasitic Extraction.
+
+[REPOSITORY]
+https://github.com/afzalamu/CMOS-Inverter-Design-and-GDSII-Generation-using-Cadence-Virtuoso-GPDK90-`
+                            },
+                             "cmos_inverter_analysis.txt": {
+                                "type": "file",
+                                "content": `PROJECT: Design and Analysis of CMOS Inverter
+DATE: Nov 2022
+TOOLS: LT Spice, Electric Binary
+
+[SUMMARY]
+Explored MOSFET models for TSMC 180nm and analyzed logic configurations.
+Calculated VOH, VOL, VIH, VIL and switching threshold.
+
+[REPOSITORY]
+https://github.com/afzalamu/cmos-inverter-design-and-analysis-using-tsmc180nm`
+                            }
+                        }
+                    },
+                    "publications": {
+                        "type": "dir",
+                        "children": {
+                            "IEEE_VLSI_SATA_2024.txt": {
+                                "type": "file",
+                                "content": `PAPER: A 5GHz Gain-Bandwidth Op-Amp in 180nm Technology
+CONFERENCE: 4th IEEE International Conference on VLSI SATA
+DATE: May 2024
+
+[ABSTRACT]
+Presented a high-speed Op-Amp architecture optimized for 5GHz GBW applications.`
+                            }
+                        }
+                    },
+                    "education": {
+                        "type": "dir",
+                        "children": {
+                            "amu_btech.txt": {
+                                "type": "file",
+                                "content": `DEGREE: Bachelor of Technology
+MAJOR: Electronics Engineering
+INSTITUTE: Aligarh Muslim University
+YEAR: 2021 - 2025
+
+[COURSEWORK]
+* VLSI Design
+* Digital System Design
+* Analog Electronics`
+                            }
+                        }
+                    },
+                    "skills": {
+                        "type": "dir",
+                        "children": {
+                            "technical_stack.txt": {
+                                "type": "file",
+                                "content": `[LANGUAGES]
+* Verilog HDL
+* C / C++
+* Python
+* Tcl Scripting
+* Bash Scripting
+
+[TOOLS]
+* Cadence Virtuoso
+* LT Spice
+* Glade Layout
+* Xilinx Vivado
+* Electric Binary
+
+[TECHNOLOGIES]
+* FinFET 7nm
+* CMOS 180nm / 28nm
+* FPGA (Xilinx Artix-7)`
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // --- 2. BOOT LOGIC ---
+        const bootScreen = document.getElementById('boot-screen');
+        const terminalContainer = document.getElementById('terminal-container');
+        
+        const bootMessages = [
+            "Initializing Kernel...",
+            "Loading Modules: graphics, network, input...",
+            "Mounting file system: /dev/sda1 (Afzal_Portfolio)...",
+            "Checking memory... 32GB OK",
+            "Starting visual interface...",
+            "Welcome, Visitor."
+        ];
+
+        async function runBoot() {
+            for (let msg of bootMessages) {
+                const p = document.createElement('div');
+                p.className = "output-line";
+                p.style.color = "#6272a4";
+                p.innerText = `[ OK ] ${msg}`;
+                bootScreen.appendChild(p);
+                await new Promise(r => setTimeout(r, 300));
+            }
+            await new Promise(r => setTimeout(r, 500));
+            bootScreen.style.display = "none";
+            terminalContainer.style.display = "block";
+            document.getElementById('cmd-input').focus();
+        }
+
+        // --- 3. TERMINAL LOGIC ---
+        let currentPath = ["~"];
+        let historyStack = [];
+        let historyIdx = -1;
+        let isGvimOpen = false;
+        let gvimBuffer = "";
+
+        const cmdInput = document.getElementById('cmd-input');
+        const historyDiv = document.getElementById('history');
+        const pathSpan = document.getElementById('current-path');
+        const gvimModal = document.getElementById('gvim-overlay');
+        const gvimContent = document.getElementById('gvim-content');
+        const gvimLines = document.getElementById('gvim-lines');
+        const gvimFilename = document.getElementById('gvim-filename');
+
+        function getDirFromPath(pathArray) {
+            let current = fileSystem["~"];
+            for (let i = 1; i < pathArray.length; i++) {
+                if (current.children && current.children[pathArray[i]]) {
+                    current = current.children[pathArray[i]];
+                } else {
+                    return null;
+                }
+            }
+            return current;
+        }
+
+        function printOutput(text, type = "") {
+            const div = document.createElement('div');
+            div.className = "output-line " + type;
+            div.innerHTML = text; 
+            historyDiv.appendChild(div);
+            terminalContainer.scrollTop = terminalContainer.scrollHeight;
+        }
+
+        // Syntax Highlighter for Text Files + LINK SUPPORT
+        function colorize(text) {
+            let code = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             
-<!--==================== PROJECTS ====================-->
-<section class="projects section" id="projects" data-id="projects">
-    <h2 class="section__title">Projects</h2>
-    <span class="section__subtitle">Involved Projects</span>
+            // Header Tags like [SUMMARY]
+            code = code.replace(/(\[.*?\])/g, '<span class="syn-header">$1</span>');
+            
+            // Labels like ROLE:, COMPANY:
+            code = code.replace(/^([A-Z\s]+):/gm, '<span class="syn-label">$1:</span>');
+            
+            // Bullets * or -
+            code = code.replace(/^(\s*[\*\-])/gm, '<span class="syn-bullet">$1</span>');
+            
+            // Numbers
+            code = code.replace(/\b(\d+)\b/g, '<span class="syn-num">$1</span>');
 
-    <div class="projects__container">
+            // Link Detection (HTTP/HTTPS) - Makes them clickable
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            code = code.replace(urlRegex, '<a href="$1" target="_blank" class="syn-link">$1</a>');
+            
+            return code;
+        }
 
-                <!--==================== PROJECT 1 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">Design and Layout of 2048 × 128 SRAM Memory in 7nm FinFET Technology</h3>
-                    <span class="projects__subtitle">Associated  with Zia Semiconductor Pvt Ltd | July 2025</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
+        function openGvim(filename, content) {
+            isGvimOpen = true;
+            gvimModal.style.display = "flex";
+            gvimFilename.innerText = filename;
+            gvimContent.innerHTML = colorize(content);
+            
+            const lineCount = content.split('\n').length;
+            let linesHtml = "";
+            for(let i=1; i<=lineCount; i++) linesHtml += i + "<br>";
+            gvimLines.innerHTML = linesHtml;
+        }
 
-            <div class="projects__details">
-                <p class="projects__description">
-                    Worked on the complete design and verification of an SRAM memory block in 7nm FinFET technology. The project involved schematic design, timing verification, automation scripting, and layout implementation, covering all major aspects of custom memory design. <br>
-                    <br>
-                    <b>Key Contributions</b> 
-                    <li> Designed the schematic of the control section, including internal clock generator and pre-decoding blocks.</li>
+        function closeGvim() {
+            isGvimOpen = false;
+            gvimModal.style.display = "none";
+            gvimBuffer = "";
+            cmdInput.focus();
+        }
 
-                    <li> Implemented the SRAM array block with bitcells and performed column muxing to reduce area and improve memory efficiency.</li>
+        const commands = {
+            ls: () => {
+                const dir = getDirFromPath(currentPath);
+                if (!dir || !dir.children) return;
+                
+                let output = Object.entries(dir.children).map(([name, item]) => {
+                    return item.type === 'dir' 
+                        ? `<span class="ls-dir">${name}/</span>` 
+                        : `<span class="ls-file">${name}</span>`;
+                }).join('  ');
+                printOutput(output);
+            },
+            pwd: () => printOutput(currentPath.join('/')),
+            cd: (args) => {
+                if (!args[0]) { currentPath = ["~"]; pathSpan.innerText = "~"; return; }
+                const parts = args[0].split('/').filter(p => p !== "");
+                let tempPath = [...currentPath];
+                
+                for (let part of parts) {
+                    if (part === ".") continue;
+                    if (part === "..") {
+                        if (tempPath.length > 1) tempPath.pop();
+                    } else if (part === "~") {
+                        tempPath = ["~"];
+                    } else {
+                        const currDir = getDirFromPath(tempPath);
+                        if (currDir.children && currDir.children[part] && currDir.children[part].type === 'dir') {
+                            tempPath.push(part);
+                        } else {
+                            printOutput(`bash: cd: ${part}: No such directory`, "error");
+                            return; 
+                        }
+                    }
+                }
+                currentPath = tempPath;
+                pathSpan.innerText = currentPath.join('/');
+            },
+            gvim: (args) => {
+                if (!args[0]) { printOutput("usage: gvim <filename>"); return; }
+                const dir = getDirFromPath(currentPath);
+                const file = dir.children[args[0]];
+                if (file && file.type === 'file') openGvim(args[0], file.content);
+                else printOutput(`gvim: ${args[0]}: No such file`, "error");
+            },
+            cat: (args) => {
+                if (!args[0]) { printOutput("usage: cat <filename>"); return; }
+                const dir = getDirFromPath(currentPath);
+                const file = dir.children[args[0]];
+                if (file && file.type === 'file') printOutput(file.content);
+                else printOutput(`cat: ${args[0]}: No such file`, "error");
+            },
+            help: () => {
+                printOutput(`
+  Commands:
+  ls           List directory contents
+  cd [path]    Change directory (use 'cd ../' to go back)
+  gvim [file]  Open file in graphical editor
+  cat [file]   Print file content to terminal
+  pwd          Print working directory
+  clear        Clear screen
+                `);
+            },
+            clear: () => historyDiv.innerHTML = ""
+        };
 
-                    <li> Designed the row decoder schematic and verified its functionality.</li>
+        cmdInput.addEventListener('keydown', (e) => {
+            if (isGvimOpen) return;
 
-                    <li> Developed a self-timing circuit to generate the sense signal for accurate and reliable read operations.</li>
-
-                    <li> Designed the I/O block to support data read/write operations.</li>
-
-                    <li> Automated simulations by writing Bash scripts and generated timing.vec files to provide input stimulus for functional and timing verification.</li>
-
-                    <li> Completed layout design of the Row Decoder and integrated the SRAM array layout, ensuring DRC/LVS compliance.</li>
-                    <br>
-                </p>
-                <p class="projects__tools"><strong>Technology  and Tools Used:</strong> LT SPICE | Glade | 7nm FinFET Technology | Bash Scripting | Linux</p>
-                <!-- <a href="https://github.com/afzalamu/Design-of-Phase-locked-loop-for-2.4-GHz-frequency-in-180nm-Technology/tree/main" target="_blank" class="button button--flex button--small papers__button"> -->
-                    <!-- More Details -->
-                    <!-- <i class="uil uil-arrow-right button__icon"></i> -->
-                <!-- </a> -->
-            </div>
-        </div>
-
-                <!--==================== PROJECT 1 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">Design of Phase Locked Loop in CMOS 180nm Technology </h3>
-                    <span class="projects__subtitle">Aug 2024</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
-
-            <div class="projects__details">
-                <p class="projects__description">
-                    This project included the complete design and simulation of 2.4 GHz Phase locked loop (PLL) in 180 nm Technology, targeting applications like Bluetooth and Wi-fi.
-                    It included designing of PLL Blocks : NMOS based LC VCO, Frequency Divider using TSPC DFF, NAND Gate based phase frequency Detector, and Charge Pump and Loop Filter, and in the end integration of all the blocks.
-                    We successfully verified the functionality of each blocks and then of the Complete PLL calculating its settling time and locking behaviour. 
-                </p>
-                <p class="projects__tools"><strong>Tools Used:</strong> LT SPICE | CADENCE |</p>
-                <a href="https://github.com/afzalamu/Design-of-Phase-locked-loop-for-2.4-GHz-frequency-in-180nm-Technology/tree/main" target="_blank" class="button button--flex button--small papers__button">
-                    More Details
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-
-        <!--==================== PROJECT 1 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">Design and FPGA Implementation of Neural Network-based Digit Recognition System</h3>
-                    <span class="projects__subtitle">Jan - May 2024</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
-
-            <div class="projects__details">
-                <p class="projects__description">
-                    Design of software model of Neural Network for Handwritten Digit Recognition system using Python. Hardware realization of the neural network using Verilog HDL, validating behavioral, Post synthesis & Post Implementation Simulations and then ANN is implemented on FPGA.
-                </p>
-                <p class="projects__tools"><strong>Tools Used:</strong> Xilinx Vivado, VS Code | <strong>FPGA Board:</strong> NEXYS A7 | <strong>Languages:</strong> Verilog HDL & Python</p>
-                <a href="https://www.linkedin.com/posts/malik-afzal_fpgaimplementation-neuralnetworkdesign-hardwaredesign-activity-7214560873271476224-Y0GQ/" target="_blank" class="button button--flex button--small papers__button">
-                    More Details
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-
-        <!--==================== PROJECT 2 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">Design, Simulation, and Layout of Two-Stage Operational Amplifier</h3>
-                    <span class="projects__subtitle">June - July 2023</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
-
-            <div class="projects__details">
-                <p class="projects__description">
-                    Utilized Gm/Id methodology to design and simulate a Two-Stage Operational Amplifier in the 180 nm technology for the specifications: Gain >1000, Gain Bandwidth Product (GBW) > 1GHz, and Phase Margin of 50.
-                </p>
-                <p class="projects__tools"><strong>Tools Used:</strong> LT Spice, Analog Designer Toolbox (ADT), Electric Binary.</p>
-                 <a href="https://github.com/afzalamu/Design-of-two-stage-operational-amplifier-at-180nm-Technology" target="_blank" class="button button--flex button--small papers__button">
-                    GitHub
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-            <!--==================== PROJECT 3 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">Design and FPGA Implementation of FIR Filter using MAC (Multiplier-Accumulator) on FPGA</h3>
-                    <span class="projects__subtitle">Nov 2023</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
-
-            <div class="projects__details">
-                <p class="projects__description">
-                     The project covers the entire workflow of designing a FIR filter using MAC Multiplier and accumulator unit and followed by its implementtaion on to the FPGA Board,
-                It includes the various submodules such as Multiplier, adder, RAM, ROM, register, and a Finite state machine to handle  the signals like reset, load, write etc, This was successfully implememnted onto the F[GA.</p>
-                <p class="projects__tools"><strong>Tools Used:</strong> Xilinx Vivado</p>
-                <a href="https://github.com/afzalamu/FIR-Filter-using-MAC" target="_blank" class="button button--flex button--small papers__button">
-                    GitHub
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-            <!--==================== PROJECT 3 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">CMOS Inverter Design and GDSII Generation using Cadence Virtuoso (GPDK90)</h3>
-                    <span class="projects__subtitle">Nov 2023</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
-
-            <div class="projects__details">
-                <p class="projects__description">
-                     The project covers the entire workflow from schematic design to GDSII generation, including pre-layout and post-layout simulations, delay calculations, RC parasitics extraction, and validation through DRC and LVS checks.
-The goal was to successfully implement the CMOS inverter design and perform a detailed comparison between pre-layout and post-layout simulation results.          </p>
-                <p class="projects__tools"><strong>Tools Used:</strong> Cadence Virtuoso</p>
-                <a href="https://github.com/afzalamu/CMOS-Inverter-Design-and-GDSII-Generation-using-Cadence-Virtuoso-GPDK90-" target="_blank" class="button button--flex button--small papers__button">
-                    GitHub
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-        <!--==================== PROJECT 4 ====================-->
-        <div class="projects__content">
-            <div class="projects__header">
-<!--                 <i class="uil uil-swatchbook projects__icon"></i> -->
-                <div>
-                    <h3 class="projects__title">Design and Analysis of CMOS Inverter using CMOS 180nm Technology</h3>
-                    <span class="projects__subtitle">Nov 2022</span>
-                </div>
-                <i class="uil uil-angle-down projects__arrow"></i>
-            </div>
-
-            <div class="projects__details">
-                <p class="projects__description">
-                    Explored MOSFET models for TSMC180nm, Analyzed strong 0/1 and weak 1/0 logic configurations through simulation. Designed CMOS Inverter, and analyzed its voltage transfer characteristics and key design parameters like VOH, VOL, VIH, VIL, and the switching threshold, with its layout using Electric Binary.
-                </p>
-                <p class="projects__tools"><strong>Tools Used:</strong> LT Spice, Electric Binary.</p>
-                <a href="https://github.com/afzalamu/cmos-inverter-design-and-analysis-using-tsmc180nm" target="_blank" class="button button--flex button--small papers__button">
-                    GitHub
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-
-        
-    </div>
-</section>
-
-<style>
-.projects__container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.projects__content {
-    background-color: #fff;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.projects__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.projects__title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.projects__subtitle {
-    font-size: 0.875rem;
-    color: #777;
-}
-
-.projects__arrow {
-    font-size: 1.25rem;
-    transition: transform 0.3s;
-    color: #777;
-}
-
-.projects__details {
-    margin-top: 1rem;
-    display: none;
-    transition: max-height 0.3s;
-}
-
-.projects__description {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    margin-bottom: 0.5rem;
-    color: #555;
-}
-
-.projects__tools {
-    font-size: 0.875rem;
-    color: #555;
-}
-
-.projects__content.active .projects__details {
-    display: block;
-}
-
-.projects__content.active .projects__arrow {
-    transform: rotate(180deg);
-}
-
-/* Night mode styles */
-body.night-mode .projects__container {
-    color: #ddd;
-}
-
-body.night-mode .projects__content {
-    background-color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-body.night-mode .projects__title,
-body.night-mode .projects__subtitle,
-body.night-mode .projects__arrow {
-    color: #ddd;
-}
-
-body.night-mode .projects__description,
-body.night-mode .projects__tools {
-    color: #bbb;
-}
-
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const projectHeaders = document.querySelectorAll('.projects__header');
-
-    projectHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const projectContent = header.parentElement;
-            projectContent.classList.toggle('active');
+            if (e.key === 'Enter') {
+                const raw = cmdInput.value;
+                const parts = raw.trim().split(/\s+/);
+                const cmd = parts[0];
+                const args = parts.slice(1);
+                
+                printOutput(`<span class="user">visitor</span><span style="color:white">@</span><span class="host">afzal.dev</span>:<span class="path">${currentPath.join('/')}</span>$ ${raw}`);
+                
+                if (raw.trim() !== "") {
+                    historyStack.push(raw);
+                    historyIdx = historyStack.length;
+                    if (commands[cmd]) commands[cmd](args);
+                    else printOutput(`bash: ${cmd}: command not found`, "error");
+                }
+                cmdInput.value = "";
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (historyIdx > 0) cmdInput.value = historyStack[--historyIdx];
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIdx < historyStack.length - 1) cmdInput.value = historyStack[++historyIdx];
+                else cmdInput.value = "";
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                const dir = getDirFromPath(currentPath);
+                const currentInput = cmdInput.value;
+                const lastSpace = currentInput.lastIndexOf(" ");
+                const partial = currentInput.substring(lastSpace + 1);
+                
+                const match = Object.keys(dir.children).find(k => k.startsWith(partial));
+                if (match) {
+                    cmdInput.value = currentInput.substring(0, lastSpace + 1) + match;
+                }
+            }
         });
-    });
-});
 
-</script>
-
-<!-- --------------------------------------------------------------------------------- -->
-<!--==================== PAPERS ====================-->
-<section class="publications section" id="publications" data-id="publications">
-    <h2 class="section__title">Publications</h2>
-    <div class="papers__container">
-        <!--==================== PAPER ====================-->
-        <div class="papers__content">
-            <div class="papers__header">
-                <div>
-                    <h3 class="papers__title">A 5GHz Gain-Bandwidth Op-Amp in 180nm Technology</h3>
-                    <p class="papers__subtitle">May 2024</p>
-                </div>
-                <i class="uil uil-angle-down papers__arrow"></i>
-            </div>
-            <div class="papers__details">
-                <p class="papers__description">
-                    Conference: 4th IEEE International Conference on VLSI Systems, Architecture, Technology, and Applications (VLSI SATA 2024)
-                </p>
-                <a href="https://ieeexplore.ieee.org/document/10560243" target="_blank" class="button button--flex button--small papers__button">
-                    Read
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    /* Default styles (day mode) */
-    .papers__container {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .papers__content {
-        background-color: #fff; /* Default background color */
-        border-radius: 1rem;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        cursor: pointer; /* Make the whole card clickable */
-    }
-
-    .papers__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .papers__title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #333; /* Default text color */
-    }
-
-    .papers__subtitle {
-        font-size: 0.875rem;
-        color: #777; /* Default subtitle color */
-    }
-
-    .papers__arrow {
-        font-size: 1.25rem;
-        transition: transform 0.3s;
-        color: #777; /* Default arrow color */
-    }
-
-    .papers__details {
-        margin-top: 1rem;
-        display: none;
-        transition: max-height 0.3s;
-    }
-
-    .papers__description {
-        font-size: 0.875rem;
-        line-height: 1.6;
-        margin-bottom: 0.5rem;
-        color: #555; /* Default description text color */
-    }
-
-    .papers__button {
-        display: flex;
-        align-items: center;
-        font-size: 0.875rem;
-        color: #fff; /* Default button text color */
-        background-color: #007bff; /* Default button background color */
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        text-decoration: none;
-    }
-
-    /* Night mode styles */
-    body.night-mode .papers__container {
-        color: #ddd; /* Light text color for night mode */
-    }
-
-    body.night-mode .papers__content {
-        background-color: #333; /* Darker background color for papers content */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    }
-
-    body.night-mode .papers__title,
-    body.night-mode .papers__subtitle,
-    body.night-mode .papers__arrow {
-        color: #ddd; /* Light text color for titles, subtitle, and arrow */
-    }
-
-    body.night-mode .papers__description {
-        color: #bbb; /* Light text color for description */
-    }
-
-    body.night-mode .papers__button {
-        color: #fff; /* Light text color for button text */
-        background-color: #f9660b; /* Different color for button in night mode */
-    }
-</style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const paperContents = document.querySelectorAll('.papers__content');
-
-        paperContents.forEach(content => {
-            content.addEventListener('click', () => {
-                content.classList.toggle('active');
-                const details = content.querySelector('.papers__details');
-                details.style.display = content.classList.contains('active') ? 'block' : 'none';
-            });
+        window.addEventListener('keypress', (e) => {
+            if (!isGvimOpen) return;
+            gvimBuffer += e.key;
+            if (gvimBuffer.endsWith(":q") && e.key === "Enter") closeGvim();
+            if (e.key === "Escape") closeGvim();
         });
-    });
-</script>
 
-<!--==================== CONTACT ====================-->
-<section class="contact section" id="contact">
-    <h2 class="section__title">Contact Me</h2>
-    <span class="section__subtitle">Get in touch</span>
+        runBoot();
 
-    <div class="contact__container container grid">
-        <!-- Email -->
-        <div class="contact__information">
-            <i class="uil uil-envelope contact__icon"></i>
-            <div>
-                <h3 class="contact__title">Email</h3>
-                <a href="mailto:afzalmalik68099@gmail.com" class="contact__subtitle">afzalmalik68099@gmail.com</a>
-            </div>
-        </div>
-
-        <!-- LinkedIn -->
-        <div class="contact__information">
-            <i class="uil uil-linkedin contact__icon"></i>
-            <div>
-                <h3 class="contact__title">LinkedIn</h3>
-                <a href="https://www.linkedin.com/in/malik-afzal/" target="_blank" class="contact__subtitle">Username: malik-afzal</a>
-            </div>
-        </div>
-
-        <!-- GitHub -->
-        <div class="contact__information">
-            <i class="uil uil-github-alt contact__icon"></i>
-            <div>
-                <h3 class="contact__title">GitHub</h3>
-                <a href="https://github.com/afzalamu" target="_blank" class="contact__subtitle">Username: afzalamu</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-          
-        <!--==================== FOOTER ====================-->
-        <footer class="footer">
-            <div class="footer__bg">
-                <div class="footer__container container grid">
-                    <div>
-                        <a href="#" class="footer__title">Afzal Malik</a><br>
-                        <span class="footer__subtitle">Electronics Engineer</span>
-                    </div>
-
-                    <ul class="footer__links">
-                         <li>
-                            <a href="#home" class="footer__link">Home</a>
-                        </li>
-                         <li>
-                            <a href="#about" class="footer__link">About</a>
-                        </li>
-                         <li>
-                            <a href="#skills" class="footer__link">Skills</a>
-                        </li>
-                        <li>
-                            <a href="#projects" class="footer__link">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#publications" class="footer__link">Publications</a>
-                        </li>
-                        
-                    </ul>
-
-                    <div class="footer__socials">
-                        <a href="https://www.linkedin.com/in/malik-afzal/" target="_blank" class="footer__social">
-                            <i class="uil uil-linkedin-alt"></i>
-                        </a>
-
-                        <a href="https://www.researchgate.net/profile/Afzal-Malik-3" target="_blank" class="footer__social">
-                            <i class="uil uil-book-open"></i>
-                        </a>
-
-                        <a href="https://github.com/afzalamu" target="_blank" class="footer__social">
-                            <i class="uil uil-github-alt"></i>
-                        </a>
-
-                    </div>
-                </div>
-
-                <p class="footer__copy">&#169; All rights reserved.</p>
-            </div>
-        </footer>
-        
-        <!--==================== SCROLL TOP ====================-->
-        <a href="" class="scrollup" id="scroll-up">
-            <i class="uil uil-arrow-up scrollup__icon"></i>
-        </a>
-
-        <!--==================== SWIPER JS ====================-->
-        <script src="assets/js/swiper-bundle.min.js"></script>
-
-        <!--==================== MAIN JS ====================-->
-        <script src="assets/js/main.js"></script>
-    </body>
+    </script>
+</body>
 </html>
-
