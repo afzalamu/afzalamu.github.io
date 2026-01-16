@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Afzal Malik @ Terminal</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,7 @@
             --prompt-user: #58a6ff;
             --prompt-host: #d2a8ff;
             --prompt-path: #7ee787;
+            --suggestion-bg: #21262d;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +36,7 @@
             color: var(--text-main);
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile */
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -44,12 +45,13 @@
         /* --- TOP NAVIGATION BAR --- */
         nav {
             height: 60px;
+            min-height: 60px;
             background-color: var(--bg-nav);
             border-bottom: 1px solid #30363d;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 20px;
             z-index: 1000;
         }
 
@@ -61,11 +63,13 @@
             border: 1px solid var(--text-green);
             padding: 5px 10px;
             border-radius: 4px;
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
             gap: 20px;
+            align-items: center;
         }
 
         .nav-item {
@@ -73,26 +77,42 @@
             text-decoration: none;
             font-size: 14px;
             transition: color 0.2s;
+            display: flex;
+            align-items: center;
         }
 
         .nav-item:hover { color: var(--text-cyan); }
-        .nav-item i { margin-right: 6px; }
+        .nav-item i { margin-right: 6px; font-size: 16px; }
 
         /* --- TERMINAL AREA --- */
         #terminal-container {
             flex-grow: 1;
-            padding: 20px;
+            padding: 15px;
             overflow-y: auto;
+            overflow-x: hidden;
             position: relative;
             z-index: 1;
             display: none; /* Hidden until boot finishes */
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 60px; /* Space for suggestion bar */
         }
         
-        #terminal-container::-webkit-scrollbar { width: 8px; }
+        #terminal-container::-webkit-scrollbar { width: 6px; }
         #terminal-container::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
 
-        .output-line { margin-bottom: 4px; white-space: pre-wrap; line-height: 1.5; }
-        .prompt-line { display: flex; align-items: center; margin-top: 5px; }
+        .output-line { 
+            margin-bottom: 4px; 
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+            line-height: 1.5; 
+        }
+
+        .prompt-line { 
+            display: flex; 
+            align-items: center; 
+            margin-top: 5px; 
+            flex-wrap: wrap; 
+        }
         
         input#cmd-input {
             background: transparent;
@@ -103,6 +123,48 @@
             flex-grow: 1;
             outline: none;
             margin-left: 8px;
+            min-width: 50px;
+        }
+
+        /* --- MOBILE SUGGESTION BAR --- */
+        #suggestion-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--suggestion-bg);
+            border-top: 1px solid #30363d;
+            padding: 10px;
+            display: none; /* Hidden by default */
+            gap: 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+            z-index: 2000;
+        }
+
+        .suggestion-item {
+            background-color: #30363d;
+            color: var(--text-cyan);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            border: 1px solid #444c56;
+            display: inline-block;
+        }
+
+        .suggestion-item:hover {
+            background-color: #444c56;
+            color: white;
+        }
+
+        /* ASCII Art */
+        .ascii-art {
+            color: var(--prompt-path);
+            font-weight: bold;
+            margin-bottom: 20px;
+            white-space: pre;
+            line-height: 1.2;
         }
 
         /* Colors */
@@ -118,7 +180,7 @@
         /* --- BOOT SCREEN --- */
         #boot-screen {
             position: fixed;
-            top: 60px; /* Below nav */
+            top: 60px; 
             left: 0; width: 100%; height: calc(100% - 60px);
             background: var(--bg-term);
             padding: 20px;
@@ -131,11 +193,12 @@
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 85%; height: 85%;
+            width: 80%; 
+            height: 80%;
             background-color: var(--bg-gvim);
             border: 1px solid #44475a;
             box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-            z-index: 2000;
+            z-index: 3000;
             flex-direction: column;
             font-size: 14px;
         }
@@ -159,14 +222,9 @@
             background: none;
             border: none;
             color: var(--text-red);
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .close-btn:hover {
-            transform: scale(1.2);
-            color: #ff0000;
+            padding: 5px;
         }
 
         .gvim-body {
@@ -175,24 +233,26 @@
             overflow-y: auto;
             white-space: pre-wrap;
             display: flex;
+            -webkit-overflow-scrolling: touch;
         }
 
         .line-numbers {
             color: var(--text-muted);
             text-align: right;
-            padding-right: 15px;
+            padding-right: 10px;
             border-right: 1px solid #44475a;
-            margin-right: 15px;
-            min-width: 35px;
+            margin-right: 10px;
+            min-width: 30px;
             user-select: none;
+            font-size: 12px;
         }
 
-        .code-content { flex-grow: 1; outline: none; }
+        .code-content { flex-grow: 1; outline: none; font-size: 13px; }
 
         .gvim-status-bar {
             background-color: #44475a;
             padding: 4px 10px;
-            font-size: 12px;
+            font-size: 11px;
             display: flex;
             justify-content: space-between;
             color: var(--text-cyan);
@@ -206,6 +266,26 @@
         .syn-num { color: var(--text-purple); }
         .syn-link { color: #58a6ff; text-decoration: underline; cursor: pointer; }
 
+        /* --- MOBILE MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            nav { padding: 0 15px; }
+            .nav-item span { display: none; } 
+            .nav-item i { margin-right: 0; font-size: 20px; } 
+            .nav-links { gap: 25px; }
+
+            body { font-size: 12px; }
+            input#cmd-input { font-size: 12px; }
+            .ascii-art { font-size: 10px; }
+            
+            #gvim-overlay { width: 95%; height: 85%; }
+            .line-numbers { min-width: 25px; margin-right: 5px; padding-right: 5px; }
+        }
+
+        @media (max-width: 400px) {
+            .ascii-art { display: none; }
+            .nav-logo { font-size: 16px; }
+        }
+
     </style>
 </head>
 <body>
@@ -213,26 +293,26 @@
     <nav>
         <a href="#" class="nav-logo" onclick="location.reload()">AM.</a>
         <div class="nav-links">
-            <a href="mailto:afzalmalik68099@gmail.com" class="nav-item"><i class="fa-solid fa-envelope"></i> Email</a>
-            <a href="https://www.linkedin.com/in/malik-afzal/" target="_blank" class="nav-item"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/afzalamu" target="_blank" class="nav-item"><i class="fa-brands fa-github"></i> GitHub</a>
-            <a href="assets/pdf/AfzalMalik_Resume.pdf" target="_blank" class="nav-item" style="color: var(--text-green)"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+            <a href="mailto:afzalmalik68099@gmail.com" class="nav-item" title="Email"><i class="fa-solid fa-envelope"></i> <span>Email</span></a>
+            <a href="https://www.linkedin.com/in/malik-afzal/" target="_blank" class="nav-item" title="LinkedIn"><i class="fa-brands fa-linkedin"></i> <span>LinkedIn</span></a>
+            <a href="https://github.com/afzalamu" target="_blank" class="nav-item" title="GitHub"><i class="fa-brands fa-github"></i> <span>GitHub</span></a>
+            <a href="assets/pdf/AfzalMalik_Resume.pdf" target="_blank" class="nav-item" style="color: var(--text-green)" title="Resume"><i class="fa-solid fa-file-pdf"></i> <span>Resume</span></a>
         </div>
     </nav>
 
     <div id="boot-screen"></div>
 
     <div id="terminal-container" onclick="document.getElementById('cmd-input').focus()">
-        <div style="color: var(--prompt-path); font-weight: bold; margin-bottom: 20px;">
-   _____  ____ ______ ___   _      <br>
-  /  _  \|   |/  /   /  /  / \     <br>
- /  /_\  \   <  /   /  /  /  /     <br>
-/    |    \   \ \  /  /__/  /__    <br>
-\____|__  /__| \ \/____/____/  /   <br>
+        <div class="ascii-art">
+   _____  ____ ______ ___   _      
+  /  _  \|   |/  /   /  /  / \     
+ /  /_\  \   <  /   /  /  /  /     
+/    |    \   \ \  /  /__/  /__    
+\____|__  /__| \ \/____/____/  /   
         \/      \/             \/    
         </div>
         <div style="margin-bottom: 20px;">
-            Afzal Malik | Design Engineer [Version 3.6.0]<br>
+            Afzal Malik | Design Engineer [Version 3.8.0]<br>
             (c) 2026 Afzal Malik. All rights reserved.<br><br>
             Type <span style="color: var(--text-green)">'help'</span> for a list of commands.<br>
             Type <span style="color: var(--text-pink)">'ls'</span> to see files.<br>
@@ -244,9 +324,11 @@
 
         <div class="prompt-line">
             <span class="user">visitor</span><span style="color:white">@</span><span class="host">afzal.dev</span><span style="color:white">:</span><span class="path" id="current-path">~</span><span style="color:white">$</span>
-            <input type="text" id="cmd-input" autocomplete="off" spellcheck="false">
+            <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" autocapitalize="none">
         </div>
     </div>
+
+    <div id="suggestion-bar"></div>
 
     <div id="gvim-overlay">
         <div class="gvim-header">
@@ -420,8 +502,12 @@ DATE: Nov 2023
 TOOLS: Cadence Virtuoso (GPDK90)
 
 [SUMMARY]
-Covered the entire workflow from schematic design to GDSII generation.
-Verified via DRC, LVS, and RC Parasitic Extraction.
+Covered the entire workflow from schematic design to GDSII generation for a CMOS Inverter.
+
+[WORKFLOW]
+* Design: Schematic Entry and Pre-layout simulation.
+* Layout: Custom layout (Poly, Metal, Wells).
+* Verification: Performed DRC, LVS, and RC Parasitic Extraction.
 
 [REPOSITORY]
 https://github.com/afzalamu/CMOS-Inverter-Design-and-GDSII-Generation-using-Cadence-Virtuoso-GPDK90-`
@@ -540,6 +626,7 @@ YEAR: 2021 - 2025
         const cmdInput = document.getElementById('cmd-input');
         const historyDiv = document.getElementById('history');
         const pathSpan = document.getElementById('current-path');
+        const suggestionBar = document.getElementById('suggestion-bar');
         const gvimModal = document.getElementById('gvim-overlay');
         const gvimContent = document.getElementById('gvim-content');
         const gvimLines = document.getElementById('gvim-lines');
@@ -562,26 +649,18 @@ YEAR: 2021 - 2025
             div.className = "output-line " + type;
             div.innerHTML = text; 
             historyDiv.appendChild(div);
+            // Ensure we scroll enough so input isn't hidden by keyboard/suggestion bar
             terminalContainer.scrollTop = terminalContainer.scrollHeight;
         }
 
-        // Syntax Highlighter for Text Files + LINK SUPPORT
+        // Syntax Highlighter with Links
         function colorize(text) {
             let code = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             
-            // Header Tags like [SUMMARY]
             code = code.replace(/(\[.*?\])/g, '<span class="syn-header">$1</span>');
-            
-            // Labels like ROLE:, COMPANY:
             code = code.replace(/^([A-Z\s]+):/gm, '<span class="syn-label">$1:</span>');
-            
-            // Bullets * or -
             code = code.replace(/^(\s*[\*\-])/gm, '<span class="syn-bullet">$1</span>');
-            
-            // Numbers
             code = code.replace(/\b(\d+)\b/g, '<span class="syn-num">$1</span>');
-
-            // Link Detection (HTTP/HTTPS) - Makes them clickable
             const urlRegex = /(https?:\/\/[^\s]+)/g;
             code = code.replace(urlRegex, '<a href="$1" target="_blank" class="syn-link">$1</a>');
             
@@ -607,6 +686,7 @@ YEAR: 2021 - 2025
             cmdInput.focus();
         }
 
+        // --- 4. COMMANDS ---
         const commands = {
             ls: () => {
                 const dir = getDirFromPath(currentPath);
@@ -672,11 +752,52 @@ YEAR: 2021 - 2025
             clear: () => historyDiv.innerHTML = ""
         };
 
+        // --- 5. EVENT LISTENERS ---
+        
+        // AUTOCOMPLETE / SUGGESTION LOGIC FOR MOBILE
+        cmdInput.addEventListener('input', (e) => {
+            const val = cmdInput.value;
+            const lastSpaceIndex = val.lastIndexOf(' ');
+            const currentWord = val.substring(lastSpaceIndex + 1);
+
+            if (currentWord.length > 0) {
+                const dir = getDirFromPath(currentPath);
+                if (dir && dir.children) {
+                    const matches = Object.keys(dir.children).filter(k => k.startsWith(currentWord));
+                    
+                    if (matches.length > 0) {
+                        suggestionBar.innerHTML = '';
+                        suggestionBar.style.display = 'flex';
+                        
+                        matches.forEach(match => {
+                            const btn = document.createElement('div');
+                            btn.className = 'suggestion-item';
+                            btn.innerText = match;
+                            btn.onclick = () => {
+                                // Auto-fill
+                                const newVal = val.substring(0, lastSpaceIndex + 1) + match;
+                                cmdInput.value = newVal;
+                                suggestionBar.style.display = 'none';
+                                cmdInput.focus();
+                            };
+                            suggestionBar.appendChild(btn);
+                        });
+                    } else {
+                        suggestionBar.style.display = 'none';
+                    }
+                }
+            } else {
+                suggestionBar.style.display = 'none';
+            }
+        });
+
         cmdInput.addEventListener('keydown', (e) => {
             if (isGvimOpen) return;
 
             if (e.key === 'Enter') {
                 const raw = cmdInput.value;
+                suggestionBar.style.display = 'none'; // Hide suggestions on enter
+                
                 const parts = raw.trim().split(/\s+/);
                 const cmd = parts[0];
                 const args = parts.slice(1);
