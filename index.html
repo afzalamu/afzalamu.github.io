@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Afzal Malik — Memory Design Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F5F2ED;
+    --bg2: #EDEAE3;
+    --ink: #1A1814;
+    --ink2: #4A4740;
+    --ink3: #8A8680;
+    --accent: #C1440E;
+    --accent2: #1E4D6B;
+    --line: #D8D4CC;
+    --white: #FDFCFA;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245,242,237,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+    border-right: 1px solid var(--line);
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink2);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 28rem;
+    line-height: 1.7;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.8rem;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn-filled { background: var(--accent); color: var(--white); border-color: var(--accent); }
+  .btn-filled:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 5rem 4rem;
+    position: relative;
+  }
+  .hero-photo-wrap {
+    position: relative;
+    width: 280px; height: 280px;
+  }
+  .hero-photo-wrap::before {
+    content: '';
+    position: absolute; top: 14px; left: 14px;
+    width: 100%; height: 100%;
+    border: 2px solid var(--accent);
+    z-index: 0;
+  }
+  .hero-photo {
+    position: relative; z-index: 1;
+    width: 280px; height: 280px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(10%);
+  }
+  .hero-photo-placeholder {
+    position: relative; z-index: 1;
+    width: 280px; height: 280px;
+    background: var(--bg2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--ink3); letter-spacing: 0.1em; text-align: center;
+    padding: 1rem;
+  }
+  .hero-stats {
+    margin-top: 2.5rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--line);
+    width: 100%; border: 1px solid var(--line);
+  }
+  .stat {
+    background: var(--bg); padding: 1rem 1.25rem;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--accent);
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink3); margin-top: 0.15rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 5rem; border-top: 1px solid var(--line); }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem; color: var(--ink);
+  }
+  .section-line {
+    flex: 1; height: 1px; background: var(--line); margin-left: 0.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 1.05rem; color: var(--ink2); line-height: 1.85;
+    margin-bottom: 1.25rem;
+  }
+  .about-facts { display: flex; flex-direction: column; gap: 1.5rem; }
+  .fact-row {
+    display: flex; gap: 1rem;
+    padding-bottom: 1.5rem; border-bottom: 1px solid var(--line);
+  }
+  .fact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink3); width: 7rem; flex-shrink: 0; padding-top: 0.1rem;
+  }
+  .fact-value { font-size: 0.95rem; color: var(--ink2); }
+  .fact-value a { color: var(--accent); text-decoration: none; }
+  .fact-value a:hover { text-decoration: underline; }
+
+  /* ── EXPERIENCE ── */
+  #experience .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 12rem 1fr;
+    gap: 2.5rem; padding: 2rem 0; border-bottom: 1px solid var(--line);
+    transition: background 0.2s;
+  }
+  .exp-item:hover { background: var(--bg2); padding-left: 1rem; padding-right: 1rem; margin: 0 -1rem; border-radius: 2px; }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--ink3); letter-spacing: 0.08em;
+    padding-top: 0.25rem;
+  }
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem; color: var(--ink); margin-bottom: 0.25rem;
+  }
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .exp-desc { font-size: 0.92rem; color: var(--ink2); line-height: 1.7; }
+  .exp-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem; border: 1px solid var(--line);
+    color: var(--ink3); background: var(--bg);
+  }
+
+  /* ── EDUCATION ── */
+  #education .edu-card {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 2rem; padding: 2.5rem;
+    background: var(--white); border: 1px solid var(--line);
+    margin-bottom: 1.5rem;
+  }
+  .edu-badge {
+    width: 56px; height: 56px; background: var(--accent2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 1.4rem;
+    color: white; flex-shrink: 0;
+  }
+  .edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 0.2rem; }
+  .edu-school { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .edu-meta { font-size: 0.9rem; color: var(--ink2); }
+  .edu-courses { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--ink3); margin-top: 0.5rem; }
+
+  /* ── SKILLS ── */
+  #skills .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .skill-cat { background: var(--white); padding: 2.5rem; }
+  .skill-cat-title {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
+  }
+  .skill-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.5rem 0; border-bottom: 1px solid var(--bg2);
+    font-size: 0.9rem; color: var(--ink2);
+  }
+  .skill-item::before { content: '—'; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 0.7rem; }
+
+  /* ── PROJECTS ── */
+  #projects .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card {
+    background: var(--white); border: 1px solid var(--line);
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+  .project-num {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .project-title {
+    font-family: 'DM Serif Display', serif; font-size: 1.15rem;
+    color: var(--ink); margin-bottom: 0.75rem; line-height: 1.3;
+  }
+  .project-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--ink3); margin-bottom: 0.75rem; }
+  .project-desc { font-size: 0.88rem; color: var(--ink2); line-height: 1.7; flex: 1; }
+  .project-tools { margin-top: 1.25rem; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+    text-decoration: none; margin-top: 1rem;
+  }
+  .project-link:hover { text-decoration: underline; }
+
+  /* ── PUBLICATIONS ── */
+  #publications .pub-card {
+    background: var(--white); border: 1px solid var(--line);
+    padding: 2.5rem; margin-bottom: 1px;
+    display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
+    transition: background 0.2s;
+  }
+  .pub-card:hover { background: var(--bg2); }
+  .pub-year {
+    font-family: 'DM Serif Display', serif; font-size: 2rem;
+    color: var(--line); line-height: 1; padding-top: 0.2rem; white-space: nowrap;
+  }
+  .pub-title { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 0.4rem; }
+  .pub-venue { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent2); margin-bottom: 0.5rem; }
+  .pub-authors { font-size: 0.85rem; color: var(--ink3); }
+  .pub-link {
+    display: inline-block; margin-top: 0.75rem;
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none;
+  }
+  .pub-link:hover { text-decoration: underline; }
+
+  /* ── AWARDS ── */
+  #awards .awards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .award-card { background: var(--white); padding: 2rem; }
+  .award-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+  .award-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 0.3rem; }
+  .award-by { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .award-desc { font-size: 0.88rem; color: var(--ink2); line-height: 1.65; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--ink); color: var(--bg); }
+  #contact .section-title { color: var(--bg); }
+  #contact .section-num { color: var(--accent); }
+  #contact .section-line { background: #3A3830; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .contact-intro { font-size: 1.05rem; color: #A8A49C; line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    letter-spacing: 0.08em; color: #A8A49C; text-decoration: none;
+    padding-bottom: 1rem; border-bottom: 1px solid #2A2820;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: #5A5650; margin-bottom: 0.2rem; }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #5A5650; }
+  .form-input, .form-textarea {
+    background: #23221E; border: 1px solid #3A3830;
+    color: var(--bg); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    padding: 0.85rem 1rem; outline: none;
+    transition: border-color 0.2s;
+    font-weight: 300;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: vertical; min-height: 8rem; }
+  .form-submit {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--accent); color: white; border: none;
+    padding: 0.95rem 2rem; cursor: pointer;
+    transition: background 0.2s; align-self: flex-start;
+  }
+  .form-submit:hover { background: #A03508; }
+  .form-msg { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: #5CBA7E; display: none; margin-top: 0.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: #5A5650;
+    border-top: 1px solid #2A2820;
+    padding: 2rem 5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── HAMBURGER BUTTON ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer;
+    padding: 4px; z-index: 200;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink); transition: all 0.3s;
+    transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── TABLET 1024px ── */
+  @media (max-width: 1024px) {
+    section { padding: 5rem 3rem; }
+    nav { padding: 1.1rem 2rem; }
+    .nav-links { gap: 1.25rem; }
+    .nav-links a { font-size: 0.68rem; }
+    .hero-left { padding: 5rem 2.5rem 4rem 3rem; }
+    .hero-right { padding: 4rem 2.5rem; }
+    .hero-photo-wrap, .hero-photo, .hero-photo-placeholder { width: 230px; height: 230px; }
+    #skills .skills-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    #about .about-grid { gap: 3rem; }
+    .contact-grid { gap: 3rem; }
+    footer { padding: 2rem 3rem; }
+  }
+
+  /* ── MOBILE 768px ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem; z-index: 150;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1rem; letter-spacing: 0.18em; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 6.5rem 1.5rem 2.5rem; border-right: none; border-bottom: 1px solid var(--line); text-align: center; align-items: center; }
+    .hero-name { font-size: clamp(2.8rem, 10vw, 4rem); }
+    .hero-title { font-size: 0.95rem; }
+    .hero-cta { justify-content: center; }
+    .hero-right { padding: 2.5rem 1.5rem; align-items: center; }
+    .hero-photo-wrap, .hero-photo, .hero-photo-placeholder { width: 200px; height: 200px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    section { padding: 3.5rem 1.5rem; }
+    .section-title { font-size: 1.9rem; }
+    #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.4rem; }
+    .exp-item:hover { padding-left: 0; padding-right: 0; margin: 0; }
+    .edu-card { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; }
+    #skills .skills-grid { grid-template-columns: 1fr !important; background: none; border: none; gap: 1rem; }
+    .skill-cat { border: 1px solid var(--line); }
+    #projects .projects-grid { grid-template-columns: 1fr; }
+    .pub-card { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.5rem; }
+    .pub-year { font-size: 1.4rem; }
+    #awards .awards-row { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; padding: 1.5rem; }
+    footer span:nth-child(2) { display: none; }
+  }
+
+  /* ── SMALL MOBILE 480px ── */
+  @media (max-width: 480px) {
+    nav { padding: 0.9rem 1rem; }
+    .hero-left { padding: 5.5rem 1rem 2rem; }
+    .hero-right { padding: 2rem 1rem; }
+    .hero-name { font-size: clamp(2.4rem, 12vw, 3.2rem); }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .btn { width: 100%; text-align: center; }
+    .hero-photo-wrap, .hero-photo, .hero-photo-placeholder { width: 170px; height: 170px; }
+    section { padding: 3rem 1rem; }
+    .section-header { gap: 0.75rem; }
+    .section-title { font-size: 1.6rem; }
+    .section-line { display: none; }
+    .fact-row { flex-direction: column; gap: 0.2rem; }
+    .fact-label { width: auto; }
+    .exp-date { font-size: 0.68rem; }
+    .exp-role { font-size: 1rem; }
+    .project-card { padding: 1.5rem; }
+    .award-card { padding: 1.5rem; }
+    .contact-intro { font-size: 0.95rem; }
+    .form-submit { width: 100%; }
+    .stat-num { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AM</div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+    <li><a href="#education" onclick="closeMenu()">Education</a></li>
+    <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+    <li><a href="#publications" onclick="closeMenu()">Publications</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Memory Design Engineer</div>
+    <h1 class="hero-name">Afzal<br><em>Malik</em></h1>
+    <p class="hero-title">
+      VLSI Design Engineer specialising in memory design, analog circuit design, and mixed-signal systems — with industry experience at Zia Semiconductor and STMicroelectronics across advanced CMOS nodes.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-filled">Get in Touch</a>
+      <a href="#projects" class="btn">View Work</a>
+      <a href="https://www.linkedin.com/in/malik-afzal/" target="_blank" class="btn">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-placeholder">[ Profile Photo ]<br><br>Replace with your image</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">9.3</div><div class="stat-label">CGPA — First Honrs</div></div>
+      <div class="stat"><div class="stat-num">1+</div><div class="stat-label">yr Industry Exp</div></div>
+      <div class="stat"><div class="stat-num">4+</div><div class="stat-label">VLSI Projects</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-label">IEEE Publication</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>VLSI Design Engineer with hands-on experience in memory design, analog circuit design, and mixed-signal systems. My work spans CMOS circuit design, simulation, layout, and system-level integration — with academic and industry exposure to both analog and digital VLSI flows.</p>
+      <p>Strong foundation in CMOS fundamentals, circuit analysis, and verification. I enjoy working close to silicon — building, analyzing, and validating circuits with clear performance targets.</p>
+      <p>Founder of VLSI EDGE, a technical publication for the VLSI and semiconductor engineering community. Open to opportunities in Memory Design, VLSI, and Analog/Mixed-Signal engineering.</p>
+    </div>
+    <div class="about-facts reveal">
+      <div class="fact-row"><span class="fact-label">Location</span><span class="fact-value">Bengaluru, Karnataka, India</span></div>
+      <div class="fact-row"><span class="fact-label">Current Role</span><span class="fact-value">Design Engineer @ Zia Semiconductor</span></div>
+      <div class="fact-row"><span class="fact-label">Also At</span><span class="fact-value">Memory Design Engineer @ STMicroelectronics</span></div>
+      <div class="fact-row"><span class="fact-label">Founder</span><span class="fact-value">VLSI EDGE — Technical Author & Publisher</span></div>
+      <div class="fact-row"><span class="fact-label">GATE EC 2025</span><span class="fact-value">Score 522 · Rank ~2600</span></div>
+      <div class="fact-row"><span class="fact-label">Email</span><span class="fact-value"><a href="mailto:afzalmalik68099@gmail.com">afzalmalik68099@gmail.com</a></span></div>
+      <div class="fact-row"><span class="fact-label">Portfolio</span><span class="fact-value"><a href="https://afzalamu.github.io" target="_blank">afzalamu.github.io ↗</a></span></div>
+      <div class="fact-row"><span class="fact-label">LinkedIn</span><span class="fact-value"><a href="https://linkedin.com/in/malik-afzal" target="_blank">linkedin.com/in/malik-afzal ↗</a></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-date">Oct 2025 – Present<br>Noida, India · Hybrid</div>
+      <div>
+        <div class="exp-role">Memory Design Engineer (Subcon)</div>
+        <div class="exp-company">STMicroelectronics</div>
+        <div class="exp-desc">Working on memory design projects at advanced nodes with focus on SRAM and custom memory. Involved in circuit analysis, schematic-level design, and industry characterization flows.</div>
+        <div class="exp-tags">
+          <span class="tag">ESPCV</span><span class="tag">CUTGEN</span><span class="tag">Memory Design</span><span class="tag">SRAM</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jul 2025 – Present<br>Bengaluru · On-site</div>
+      <div>
+        <div class="exp-role">Design Engineer</div>
+        <div class="exp-company">Zia Semiconductor Pvt Ltd</div>
+        <div class="exp-desc">Full-time design engineering role focused on semiconductor circuit design and simulation at Bengaluru.</div>
+        <div class="exp-tags"><span class="tag">Circuit Design</span><span class="tag">Simulation</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun 2025 – Present<br>India · Remote</div>
+      <div>
+        <div class="exp-role">Technical Author & Founder</div>
+        <div class="exp-company">VLSI EDGE</div>
+        <div class="exp-desc">Self-employed technical author and founder of VLSI EDGE, a platform dedicated to publishing technical content for the VLSI and semiconductor engineering community.</div>
+        <div class="exp-tags"><span class="tag">Technical Writing</span><span class="tag">VLSI</span><span class="tag">Publishing</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun 2023 – Jul 2023<br>Bengaluru · Hybrid</div>
+      <div>
+        <div class="exp-role">Analog Circuit Design Intern (Academic)</div>
+        <div class="exp-company">Under Mentorship of Dr. GS Javed, Analog Design Manager @ Intel</div>
+        <div class="exp-desc">Designed and simulated key analog building blocks using gm/Id methodology in 180nm CMOS — including common-source & source follower amplifiers, single-stage and two-stage op-amps, and basic analog filters. Focused on meeting gain, bandwidth, stability, and power targets.</div>
+        <div class="exp-tags"><span class="tag">Analog Design</span><span class="tag">180nm CMOS</span><span class="tag">gm/Id</span><span class="tag">LTSpice</span></div>
+        <a href="https://github.com/afzalamu/Analog-Design-Internship" target="_blank" class="project-link" style="margin-top:0.75rem">View Repository ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-card reveal">
+    <div class="edu-badge">AMU</div>
+    <div>
+      <div class="edu-degree">Bachelor of Technology — Electronics Engineering</div>
+      <div class="edu-school">Aligarh Muslim University</div>
+      <div class="edu-meta">Nov 2021 – Jul 2025 &nbsp;·&nbsp; <strong>First Class with Honours</strong> &nbsp;·&nbsp; CGPA: 9.338 / 10</div>
+      <div class="edu-courses">Relevant Coursework: CMOS Circuits · Analog & Digital VLSI · Semiconductor Devices · Memory Architecture</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid reveal" style="grid-template-columns: repeat(4,1fr)">
+    <div class="skill-cat">
+      <div class="skill-cat-title">Technology Nodes</div>
+      <div class="skill-item">7nm</div>
+      <div class="skill-item">28nm</div>
+      <div class="skill-item">180nm</div>
+      <div class="skill-item">TSMC 90nm (GPDK90)</div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">EDA Tools & Environment</div>
+      <div class="skill-item">Cadence Virtuoso</div>
+      <div class="skill-item">LTSpice</div>
+      <div class="skill-item">Glade</div>
+      <div class="skill-item">Electric VLSI</div>
+      <div class="skill-item">ADT (Analog Designer Toolbox)</div>
+      <div class="skill-item">Xilinx Vivado</div>
+      <div class="skill-item">Eldo</div>
+      <div class="skill-item">GVim</div>
+      <div class="skill-item">Linux / Bash</div>
+      <div class="skill-item">GitHub</div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Domain Expertise</div>
+      <div class="skill-item">SRAM & Custom Memory Design</div>
+      <div class="skill-item">Memory Simulation & Characterization</div>
+      <div class="skill-item">CMOS Analog Circuit Design</div>
+      <div class="skill-item">Circuit Analysis & Simulation</div>
+      <div class="skill-item">Schematic-Level Design</div>
+      <div class="skill-item">Layout & GDSII</div>
+      <div class="skill-item">FPGA & RTL Design</div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Languages & Scripting</div>
+      <div class="skill-item">Verilog HDL</div>
+      <div class="skill-item">Python</div>
+      <div class="skill-item">C</div>
+      <div class="skill-item">Bash / Shell</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">Project 01</div>
+      <div class="project-title">Phase-Locked Loop (PLL) Design — 2.4 GHz in 180nm CMOS</div>
+      <div class="project-date">Aug 2024 – Jun 2025</div>
+      <div class="project-desc">Complete design and simulation of a 2.4 GHz PLL for wireless applications. Designed and integrated an NMOS LC VCO, TSPC-based frequency divider, PFD using NAND logic, charge pump, and loop filter. Verified locking behaviour, settling time, and stability.</div>
+      <div class="exp-tags project-tools"><span class="tag">180nm CMOS</span><span class="tag">LTSpice</span><span class="tag">PLL</span><span class="tag">VCO</span></div>
+      <a href="https://github.com/afzalamu/Design-of-Phase-locked-loop-for-2.4-GHz-frequency-in-180nm-Technology" target="_blank" class="project-link">View on GitHub ↗</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">Project 02</div>
+      <div class="project-title">Neural Network–based Digit Recognition — FPGA Implementation</div>
+      <div class="project-date">Jan 2024 – May 2024</div>
+      <div class="project-desc">Handwritten digit recognition using the MNIST dataset. Implemented neural network in Verilog HDL and deployed on NEXYS A7 FPGA. Verified behaviour through simulation and on-hardware testing.</div>
+      <div class="exp-tags project-tools"><span class="tag">Xilinx Vivado</span><span class="tag">Verilog</span><span class="tag">NEXYS A7</span><span class="tag">Python</span></div>
+      <a href="https://www.linkedin.com/posts/malik-afzal_fpgaimplementation-neuralnetworkdesign-hardwaredesign-activity-7214560873271476224" target="_blank" class="project-link">View on LinkedIn ↗</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">Project 03</div>
+      <div class="project-title">Two-Stage Op-Amp Design & Layout — 180nm CMOS</div>
+      <div class="project-date">Jun 2023 – Jul 2023 · Intel Mentorship</div>
+      <div class="project-desc">Designed using gm/Id methodology. Targets: Gain > 60 dB, GBW ≈ 1 GHz, CL = 20 fF, Phase Margin > 50°. Full flow from schematic simulation to layout generation.</div>
+      <div class="exp-tags project-tools"><span class="tag">gm/Id</span><span class="tag">LTSpice</span><span class="tag">ADT</span><span class="tag">Electric VLSI</span></div>
+      <a href="https://github.com/afzalamu/Design-of-two-stage-operational-amplifier-at-180nm-Technology" target="_blank" class="project-link">View on GitHub ↗</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">Project 04</div>
+      <div class="project-title">CMOS Inverter Design & Analysis — 180nm TSMC</div>
+      <div class="project-date">Nov 2022</div>
+      <div class="project-desc">Designed CMOS inverter using TSMC 180nm models. Analysed VTC characteristics, noise margins, and switching threshold. Completed layout and verification. Extended to Cadence Virtuoso with GPDK90 — pre/post-layout simulations, parasitics extraction, and GDSII generation.</div>
+      <div class="exp-tags project-tools"><span class="tag">LTSpice</span><span class="tag">Electric VLSI</span><span class="tag">Cadence Virtuoso</span><span class="tag">GDSII</span></div>
+      <a href="https://github.com/afzalamu/cmos-inverter-design-and-analysis-using-tsmc180nm" target="_blank" class="project-link">View on GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header reveal">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Publications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="pub-card reveal">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">A 5 GHz Gain-Bandwidth Operational Amplifier in 180nm CMOS Technology</div>
+      <div class="pub-venue">4th IEEE International Conference on VLSI Systems, Architecture, Technology and Applications (VLSI-SATA 2024) · IEEE CAS Society Bengaluru Chapter & Amrita School of Engineering · May 17, 2024</div>
+      <div class="pub-authors">Afzal Malik et al. (5 authors)</div>
+      <a href="https://ieeexplore.ieee.org/document/10560243" target="_blank" class="pub-link">View on IEEE Xplore ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-header reveal">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Honours & Awards</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="awards-row reveal">
+    <div class="award-card">
+      <div class="award-icon">🏆</div>
+      <div class="award-title">Lead Ignite Transform Scholarship (×3)</div>
+      <div class="award-by">Aligarh Education Endowment Fund</div>
+      <div class="award-desc">Thrice recipient of the LIT Scholarship for outstanding academic performance during the BTech program in Electronics Engineering.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎖️</div>
+      <div class="award-title">University Merit Financial Award (×3)</div>
+      <div class="award-by">Aligarh Muslim University</div>
+      <div class="award-desc">Recipient three times for securing a position among the Top 3 students of the Electronics Engineering batch.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">📊</div>
+      <div class="award-title">GATE EC 2025</div>
+      <div class="award-by">IIT Kanpur · Feb 2025</div>
+      <div class="award-desc">Score: 522 · All-India Rank ~2600 in Electronics and Communication Engineering.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🌐</div>
+      <div class="award-title">IELTS Academic</div>
+      <div class="award-by">British Council · Oct 2019</div>
+      <div class="award-desc">Overall Band Score: 7.5 — demonstrating professional working proficiency in English.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">Open to opportunities in Memory Design, VLSI, and Analog/Mixed-Signal engineering. Feel free to reach out for collaborations, roles, or just a conversation about semiconductors.</p>
+      <div class="contact-links">
+        <a href="mailto:afzalmalik68099@gmail.com" class="contact-link">
+          <div><div class="contact-label">Email</div>afzalmalik68099@gmail.com</div>
+        </a>
+        <a href="https://linkedin.com/in/malik-afzal" target="_blank" class="contact-link">
+          <div><div class="contact-label">LinkedIn</div>linkedin.com/in/malik-afzal</div>
+        </a>
+        <a href="https://afzalamu.github.io" target="_blank" class="contact-link">
+          <div><div class="contact-label">Portfolio</div>afzalamu.github.io</div>
+        </a>
+        <a href="https://github.com/afzalamu" target="_blank" class="contact-link">
+          <div><div class="contact-label">GitHub</div>github.com/afzalamu</div>
+        </a>
+        <div class="contact-link">
+          <div><div class="contact-label">Location</div>Bengaluru, Karnataka, India</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" id="cname" placeholder="Full name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" id="cemail" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" id="cmsg" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit()">Send Message →</button>
+        <div class="form-msg" id="form-msg">✓ Message sent — I'll get back to you shortly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Afzal Malik</span>
+  <span>Memory Design Engineer · Bengaluru, India</span>
+  <span>Built with care</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Contact form mock
+  function handleSubmit() {
+    const name = document.getElementById('cname').value.trim();
+    const email = document.getElementById('cemail').value.trim();
+    const msg = document.getElementById('cmsg').value.trim();
+    if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
+    const m = document.getElementById('form-msg');
+    m.style.display = 'block';
+    document.getElementById('cname').value = '';
+    document.getElementById('cemail').value = '';
+    document.getElementById('cmsg').value = '';
+  }
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Active nav highlight on scroll
+  const allSections = document.querySelectorAll('section[id]');
+  const allNavLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
+    allNavLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
