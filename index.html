@@ -39,13 +39,13 @@ nav.scrolled .nav-hamburger span { background: var(--ink); }
 /* HERO */
 #hero { position: relative; height: 100vh; min-height: 600px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; z-index: 0; background: #1C1C1C; }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.78; filter: grayscale(15%); }
-.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.85) 100%); }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.82; filter: grayscale(15%); }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.88) 100%); }
 .hero-content { position: relative; z-index: 1; padding: 0 4rem 4.5rem; max-width: 860px; }
-.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 1rem; }
-.hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 0.93; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 1rem; }
+.hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 0.93; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1.5rem; text-shadow: 0 2px 20px rgba(0,0,0,0.4); }
 .hero-name em { font-style: italic; }
-.hero-sub { font-size: 1rem; color: rgba(255,255,255,0.68); font-weight: 300; max-width: 32rem; line-height: 1.8; margin-bottom: 2.5rem; }
+.hero-sub { font-size: 1rem; color: rgba(255,255,255,0.85); font-weight: 300; max-width: 32rem; line-height: 1.8; margin-bottom: 2.5rem; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
 .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 .btn-hero { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2.25rem; text-decoration: none; font-weight: 400; transition: all 0.25s; display: inline-block; border: 1px solid; }
 .btn-hero.primary { background: var(--white); color: var(--ink); border-color: var(--white); }
@@ -100,22 +100,22 @@ nav.scrolled .nav-hamburger span { background: var(--ink); }
 #projects { padding: 6rem 4rem; border-bottom: 1px solid var(--line); background: var(--off); }
 .projects-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
 .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-.proj-card { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; display: block; text-decoration: none; }
-.proj-card-bg { width: 100%; height: 100%; transition: transform 0.65s ease; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: rgba(255,255,255,0.06); letter-spacing: 0.12em; }
+.proj-card { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 16/10; display: block; text-decoration: none; }
+.proj-card-bg { width: 100%; height: 100%; transition: transform 0.65s ease; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: rgba(255,255,255,0.04); letter-spacing: 0.12em; }
 .proj-card:nth-child(1) .proj-card-bg { background: linear-gradient(135deg, #1a2a1a 0%, #0a140a 100%); }
 .proj-card:nth-child(2) .proj-card-bg { background: linear-gradient(135deg, #1a1a2a 0%, #0a0a14 100%); }
 .proj-card:nth-child(3) .proj-card-bg { background: linear-gradient(135deg, #2a1a14 0%, #160c08 100%); }
 .proj-card:nth-child(4) .proj-card-bg { background: linear-gradient(135deg, #1a2020 0%, #0a1212 100%); }
-.proj-card:hover .proj-card-bg { transform: scale(1.05); }
-.proj-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; transition: background 0.3s; }
-.proj-card:hover .proj-overlay { background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 65%, transparent 100%); }
-.proj-num { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.5rem; }
-.proj-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 0.5rem; }
-.proj-tech { font-size: 0.65rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); }
-.proj-more { font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0); margin-top: 0.75rem; transition: color 0.3s; }
-.proj-card:hover .proj-more { color: rgba(255,255,255,0.65); }
-.proj-circuit { position: absolute; top: 1.5rem; right: 1.5rem; opacity: 0.05; transition: opacity 0.3s; }
-.proj-card:hover .proj-circuit { opacity: 0.15; }
+.proj-card:hover .proj-card-bg { transform: scale(1.04); }
+.proj-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.75rem 2rem; transition: background 0.3s; }
+.proj-card:hover .proj-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.15) 100%); }
+.proj-num { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem; }
+.proj-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--white); line-height: 1.25; margin-bottom: 0.45rem; }
+.proj-tech { font-size: 0.63rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.proj-more { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 0.65rem; transition: color 0.3s; display: flex; align-items: center; gap: 0.35rem; }
+.proj-card:hover .proj-more { color: rgba(255,255,255,0.75); }
+.proj-circuit { position: absolute; top: 1.25rem; right: 1.25rem; opacity: 0.04; transition: opacity 0.3s; }
+.proj-card:hover .proj-circuit { opacity: 0.12; }
 
 /* SKILLS */
 #skills { padding: 6rem 4rem; border-bottom: 1px solid var(--line); }
@@ -239,6 +239,7 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#publications">Publications</a></li>
+      <li><a href="https://www.vlsiedge.in" target="_blank" style="color:var(--accent)!important;">VLSI Edge ↗</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
@@ -254,6 +255,7 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
   <a href="#skills" onclick="closeMenu()">Skills</a>
   <a href="#publications" onclick="closeMenu()">Publications</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="https://www.vlsiedge.in" target="_blank" onclick="closeMenu()" style="color:var(--accent);font-size:1.5rem;">VLSI EDGE ↗</a>
 </div>
 
 <!-- HERO -->
@@ -286,11 +288,11 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
   <div class="intro-facts reveal">
     <div class="intro-fact"><span class="if-label">Current</span><span class="if-val">Memory Design Engineer @ STMicroelectronics</span></div>
     <div class="intro-fact"><span class="if-label">Also At</span><span class="if-val">Design Engineer @ Zia Semiconductor</span></div>
-    <div class="intro-fact"><span class="if-label">Founder</span><span class="if-val">VLSI EDGE — Technical Publishing</span></div>
+    <div class="intro-fact"><span class="if-label">Founder</span><span class="if-val"><a href="https://www.vlsiedge.in" target="_blank">VLSI EDGE</a> — Technical Publishing</span></div>
     <div class="intro-fact"><span class="if-label">Education</span><span class="if-val">BTech Electronics · AMU · CGPA 9.338</span></div>
     <div class="intro-fact"><span class="if-label">GATE 2025</span><span class="if-val">Score 522 · Rank ~2600</span></div>
     <div class="intro-fact"><span class="if-label">Location</span><span class="if-val">Bengaluru, Karnataka, India</span></div>
-    <div class="intro-fact"><span class="if-label">Email</span><span class="if-val"><a href="mailto:afzalmalik68099@gmail.com">afzalmalik68099@gmail.com</a></span></div>
+    <div class="intro-fact"><span class="if-label">Email</span><span class="if-val"><a href="/cdn-cgi/l/email-protection#93f2f5e9f2fffef2fffaf8a5aba3aaaad3f4fef2faffbdf0fcfe"><span class="__cf_email__" data-cfemail="ddbcbba7bcb1b0bcb1b4b6ebe5ede4e49dbab0bcb4b1f3beb2b0">[email&#160;protected]</span></a></span></div>
   </div>
 </section>
 
@@ -320,7 +322,7 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
   </div>
   <div class="exp-row reveal">
     <div><div class="exp-period">Jun 2025 – Present · Remote</div><div class="exp-co">VLSI EDGE</div></div>
-    <div><div class="exp-role">Technical Author & Founder</div><div class="exp-desc">Founded and run VLSI EDGE — a technical publication dedicated to in-depth content for the VLSI and semiconductor engineering community.</div><div class="exp-tags"><span class="tag">Technical Writing</span><span class="tag">VLSI</span><span class="tag">Publishing</span></div></div>
+    <div><div class="exp-role">Technical Author & Founder</div><div class="exp-desc">Founded and run VLSI EDGE — a technical publication dedicated to in-depth content for the VLSI and semiconductor engineering community. <a href="https://www.vlsiedge.in" target="_blank" style="color:var(--accent);text-decoration:none;font-size:0.8rem;">Visit vlsiedge.in →</a></div><div class="exp-tags"><span class="tag">Technical Writing</span><span class="tag">VLSI</span><span class="tag">Publishing</span></div></div>
     <div class="exp-arrow">→</div>
   </div>
   <div class="exp-row reveal">
@@ -457,9 +459,10 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
       <div class="contact-big">Let's <em>work<br>together.</em></div>
       <p class="contact-body">Open to opportunities in Memory Design, VLSI, and Analog/Mixed-Signal engineering. Reach out for collaborations, roles, or a conversation about semiconductors.</p>
       <div class="contact-links-list">
-        <a href="mailto:afzalmalik68099@gmail.com" class="cl-item"><span class="cl-label">Email</span><span class="cl-val">afzalmalik68099@gmail.com</span><span class="cl-arrow">→</span></a>
+        <a href="/cdn-cgi/l/email-protection#23424559424f4e424f4a48151b131a1a63444e424a4f0d404c4e" class="cl-item"><span class="cl-label">Email</span><span class="cl-val"><span class="__cf_email__" data-cfemail="22434458434e4f434e4b49141a121b1b62454f434b4e0c414d4f">[email&#160;protected]</span></span><span class="cl-arrow">→</span></a>
         <a href="https://linkedin.com/in/malik-afzal" target="_blank" class="cl-item"><span class="cl-label">LinkedIn</span><span class="cl-val">linkedin.com/in/malik-afzal</span><span class="cl-arrow">→</span></a>
         <a href="https://github.com/afzalamu" target="_blank" class="cl-item"><span class="cl-label">GitHub</span><span class="cl-val">github.com/afzalamu</span><span class="cl-arrow">→</span></a>
+        <a href="https://www.vlsiedge.in" target="_blank" class="cl-item"><span class="cl-label">VLSI EDGE</span><span class="cl-val">vlsiedge.in</span><span class="cl-arrow">→</span></a>
         <a href="https://afzalamu.github.io" target="_blank" class="cl-item"><span class="cl-label">Portfolio</span><span class="cl-val">afzalamu.github.io</span><span class="cl-arrow">→</span></a>
       </div>
     </div>
@@ -480,12 +483,13 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
   <div class="footer-links">
     <a href="https://linkedin.com/in/malik-afzal" target="_blank">LinkedIn</a>
     <a href="https://github.com/afzalamu" target="_blank">GitHub</a>
-    <a href="mailto:afzalmalik68099@gmail.com">Email</a>
+    <a href="https://www.vlsiedge.in" target="_blank">VLSI Edge</a>
+    <a href="/cdn-cgi/l/email-protection#9bfafde1faf7f6faf7f2f0ada3aba2a2dbfcf6faf2f7b5f8f4f6">Email</a>
   </div>
   <span>Bengaluru, India</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
   const hamburger = document.getElementById('hamburger');
@@ -504,14 +508,3 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
   reveals.forEach(r => io.observe(r));
   function handleSubmit() {
     const name = document.getElementById('cname').value.trim();
-    const email = document.getElementById('cemail').value.trim();
-    const msg = document.getElementById('cmsg').value.trim();
-    if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
-    document.getElementById('form-msg').style.display = 'block';
-    document.getElementById('cname').value = '';
-    document.getElementById('cemail').value = '';
-    document.getElementById('cmsg').value = '';
-  }
-</script>
-</body>
-</html>
