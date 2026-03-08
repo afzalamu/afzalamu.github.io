@@ -28,10 +28,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 .nav-hamburger.open span:nth-child(2){opacity:0}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-.nav-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:250;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;border-top:1px solid var(--line)}
-.nav-overlay.open{display:flex}
-.nav-overlay a{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--text);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
-.nav-overlay a:hover{color:var(--accent)}
+.nav-overlay{
+  position:fixed;top:0;right:0;bottom:0;width:280px;
+  background:var(--bg2);z-index:250;
+  flex-direction:column;align-items:flex-start;justify-content:flex-start;
+  padding:5.5rem 2rem 2rem;
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  display:flex;
+  gap:0;
+}
+.nav-overlay.open{transform:translateX(0)}
+.nav-overlay-backdrop{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:240;
+  opacity:0;transition:opacity 0.35s ease;
+}
+.nav-overlay-backdrop.open{display:block;opacity:1}
+.nav-overlay a{
+  font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:400;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--text2);text-decoration:none;
+  padding:1rem 0;border-bottom:1px solid var(--line);
+  width:100%;transition:color 0.2s,padding-left 0.2s;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-overlay a:last-child{border-bottom:none}
+.nav-overlay a:hover{color:var(--text);padding-left:0.4rem}
+.nav-overlay-label{
+  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:1.5rem;padding-bottom:1rem;
+  border-bottom:1px solid var(--line);width:100%;
+}
 
 /* HERO */
 #hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
@@ -247,14 +275,16 @@ footer span{font-size:0.62rem;letter-spacing:0.1em}
   </div>
 </nav>
 
+<div class="nav-overlay-backdrop" id="nav-backdrop"></div>
 <div class="nav-overlay" id="nav-overlay">
-  <a href="#intro" onclick="closeMenu()">About</a>
-  <a href="#experience" onclick="closeMenu()">Experience</a>
-  <a href="#projects" onclick="closeMenu()">Projects</a>
-  <a href="#skills" onclick="closeMenu()">Skills</a>
-  <a href="#publications" onclick="closeMenu()">Publications</a>
-  <a href="https://www.vlsiedge.in" target="_blank" onclick="closeMenu()" style="color:var(--accent)">VLSI Edge &#8599;</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <div class="nav-overlay-label">Navigation</div>
+  <a href="#intro" onclick="closeMenu()">About <span>→</span></a>
+  <a href="#experience" onclick="closeMenu()">Experience <span>→</span></a>
+  <a href="#projects" onclick="closeMenu()">Projects <span>→</span></a>
+  <a href="#skills" onclick="closeMenu()">Skills <span>→</span></a>
+  <a href="#publications" onclick="closeMenu()">Publications <span>→</span></a>
+  <a href="https://www.vlsiedge.in" target="_blank" onclick="closeMenu()">VLSI Edge <span>↗</span></a>
+  <a href="#contact" onclick="closeMenu()">Contact <span>→</span></a>
 </div>
 
 <section id="hero">
@@ -288,7 +318,7 @@ footer span{font-size:0.62rem;letter-spacing:0.1em}
     <div class="intro-fact"><span class="if-label">Education</span><span class="if-val">BTech Electronics &middot; AMU &middot; CGPA 9.338</span></div>
     <div class="intro-fact"><span class="if-label">GATE 2025</span><span class="if-val">Score 522 &middot; Rank ~2600</span></div>
     <div class="intro-fact"><span class="if-label">Location</span><span class="if-val">Bengaluru, Karnataka, India</span></div>
-    <div class="intro-fact"><span class="if-label">Email</span><span class="if-val"><a href="mailto:afzalmalik68099@gmail.com">afzalmalik68099@gmail.com</a></span></div>
+    <div class="intro-fact"><span class="if-label">Email</span><span class="if-val"><a href="/cdn-cgi/l/email-protection#a6c7c0dcc7cacbc7cacfcd909e969f9fe6c1cbc7cfca88c5c9cb"><span class="__cf_email__" data-cfemail="48292e32292425292421237e70787171082f25292124662b2725">[email&#160;protected]</span></a></span></div>
   </div>
 </section>
 
@@ -417,7 +447,7 @@ footer span{font-size:0.62rem;letter-spacing:0.1em}
       <div class="contact-big">Let&apos;s <em>work<br>together.</em></div>
       <p class="contact-body">Open to opportunities in Memory Design, VLSI, and Analog/Mixed-Signal engineering. Reach out for collaborations, roles, or a conversation about semiconductors.</p>
       <div class="contact-links-list">
-        <a href="mailto:afzalmalik68099@gmail.com" class="cl-item"><span class="cl-label">Email</span><span class="cl-val">afzalmalik68099@gmail.com</span><span class="cl-arrow">&rarr;</span></a>
+        <a href="/cdn-cgi/l/email-protection#a3c2c5d9c2cfcec2cfcac8959b939a9ae3c4cec2cacf8dc0ccce" class="cl-item"><span class="cl-label">Email</span><span class="cl-val"><span class="__cf_email__" data-cfemail="3f5e59455e53525e53565409070f06067f58525e5653115c5052">[email&#160;protected]</span></span><span class="cl-arrow">&rarr;</span></a>
         <a href="https://linkedin.com/in/malik-afzal" target="_blank" class="cl-item"><span class="cl-label">LinkedIn</span><span class="cl-val">linkedin.com/in/malik-afzal</span><span class="cl-arrow">&rarr;</span></a>
         <a href="https://github.com/afzalamu" target="_blank" class="cl-item"><span class="cl-label">GitHub</span><span class="cl-val">github.com/afzalamu</span><span class="cl-arrow">&rarr;</span></a>
         <a href="https://www.vlsiedge.in" target="_blank" class="cl-item"><span class="cl-label">VLSI EDGE</span><span class="cl-val">vlsiedge.in</span><span class="cl-arrow">&rarr;</span></a>
@@ -442,36 +472,29 @@ footer span{font-size:0.62rem;letter-spacing:0.1em}
     <a href="https://linkedin.com/in/malik-afzal" target="_blank">LinkedIn</a>
     <a href="https://github.com/afzalamu" target="_blank">GitHub</a>
     <a href="https://www.vlsiedge.in" target="_blank">VLSI Edge</a>
-    <a href="mailto:afzalmalik68099@gmail.com">Email</a>
+    <a href="/cdn-cgi/l/email-protection#93f2f5e9f2fffef2fffaf8a5aba3aaaad3f4fef2faffbdf0fcfe">Email</a>
   </div>
   <span>Bengaluru, India</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const nav = document.getElementById('main-nav');
   const hamburger = document.getElementById('hamburger');
   const overlay = document.getElementById('nav-overlay');
+  const backdrop = document.getElementById('nav-backdrop');
   hamburger.addEventListener('click', () => {
     const open = overlay.classList.toggle('open');
+    backdrop.classList.toggle('open', open);
     hamburger.classList.toggle('open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
   function closeMenu() {
     overlay.classList.remove('open');
+    backdrop.classList.remove('open');
     hamburger.classList.remove('open');
     document.body.style.overflow = '';
   }
+  backdrop.addEventListener('click', closeMenu);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
   function handleSubmit() {
     const name = document.getElementById('cname').value.trim();
-    const email = document.getElementById('cemail').value.trim();
-    const msg = document.getElementById('cmsg').value.trim();
-    if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
-    document.getElementById('form-msg').style.display = 'block';
-    document.getElementById('cname').value = '';
-    document.getElementById('cemail').value = '';
-    document.getElementById('cmsg').value = '';
-  }
-</script>
-</body>
-</html>
