@@ -181,11 +181,9 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
 .footer-links a { font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: rgba(255,255,255,0.7); }
 
-/* REVEAL */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-/* Fallback: if JS fails or observer doesn't fire, still show content */
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+/* REVEAL - disabled, content always visible */
+.reveal { opacity: 1; transform: none; }
+.reveal.visible { opacity: 1; transform: none; }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -503,31 +501,10 @@ footer span { font-size: 0.62rem; letter-spacing: 0.1em; }
   });
   function closeMenu() { overlay.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow = ''; }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-  // Scroll reveal - robust version
-  const reveals = document.querySelectorAll('.reveal');
-  
-  function revealElement(el, delay) {
-    setTimeout(() => el.classList.add('visible'), delay || 0);
-  }
-
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          revealElement(entry.target, 0);
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(r => io.observe(r));
-  } else {
-    // Fallback: just show everything
-    reveals.forEach(r => r.classList.add('visible'));
-  }
-
-  // Safety net: after 1.5s, force-show anything still hidden
-  setTimeout(() => {
-    reveals.forEach(r => r.classList.add('visible'));
-  }, 1500);
+  // Scroll reveal - CSS animation only, no opacity:0 default
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.animationDelay = (i * 0.05) + 's';
+    el.classList.add('animated');
+  });
   function handleSubmit() {
     const name = document.getElementById('cname').value.trim();
